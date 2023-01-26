@@ -1,0 +1,112 @@
+p {
+    margin: 0;
+    padding: 0;
+}
+
+
+.main_container {
+    padding: 0 30px;
+    margin-top: 30px;
+}
+.popular_tests p {
+    color: #dfdfdf;
+    margin-bottom: 30px;
+    margin-top: 10px;
+    font-weight: 400;
+    font-size: 1rem;
+}
+.popular_header {
+    justify-content: space-between;
+    display: flex;
+}
+.second_block {
+    padding-top: 20px;
+    vertical-align: middle;
+}
+.second_block a {
+    padding: 13px 18px;
+    display: block;
+    text-align: center;
+    background-color: #263238;
+    border-radius: 10px;
+    border: 2px solid #263238;
+}
+.second_block a:hover {
+    border: 2px solid #d4ef25;
+}
+.cards {
+    display: flex;
+    flex-wrap: nowrap;
+}
+.cards .card {
+    width: 382px;
+    background-color: #263238;
+    border-radius: 10px;
+    border: 1px solid #263238;
+    margin-right: 20px;
+}
+.cards .card img {
+    border-radius: 10px;
+}
+.block_card_info {
+    display: flex;
+}
+.author {
+    border-radius: 18px;
+    height: 30px;
+    padding: 10 0 40 0;
+    background-color: #3A454B;
+    margin-top: -23px;
+    margin-left: 20px;
+    margin-bottom: 15px;
+    padding: 3px 15px 3px 40px;
+}
+.author .avatar {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: url(../img/user_icons/lufi.jpeg) round;
+    position: absolute;
+    margin-top: 4px;
+    margin-left: -27px;
+}
+.author p {
+    margin: 0;
+    font-family: Montserrat,sans-serif;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 30px;
+}
+.card h3 {
+    margin: 0 20px;
+    font-size: 18px;
+    width: 330px;
+    padding-bottom: 15px;
+    font-family: Montserrat,sans-serif;
+    font-weight: 700;
+}
+p.discription_card {
+    color: #8c8c8c;
+    padding: 0 20px;
+    font-size: 14px;
+    line-height: 20px;
+}
+.info_about_card {
+    margin: 0 20px;
+    border-top: 1px solid #3A454B
+}
+.card:hover {
+    border: 1px solid #d4ef25;
+}
+.card_rating {
+    display: flex;
+    margin: 5px 0;
+    color: white;
+}
+.card_rating span {
+    display: block;
+    width: 22px;
+    height: 22px;
+    margin-right: 5px;
+    background-image: url(../img/interactive_icons/free-icon-flash-lightning-bolt-14963.png);
+}

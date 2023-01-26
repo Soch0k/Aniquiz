@@ -1,0 +1,155 @@
+*{
+    margin: 0px;
+    padding: 0px;
+}
+
+
+a {
+    text-decoration: none;
+    color: white;
+}
+body {
+    font-weight: 400;
+    background-color: #3A454B;
+    font-family: Montserrat,sans-serif;
+    font-size: 19px;
+    padding-top: 80px;
+}
+ul {
+    list-style: none;
+}
+
+
+header {
+    top: 0px;
+    position: fixed;
+    padding-right: 20px;
+    width: 100%;
+    z-index: 100;
+}
+
+.container_head {
+    display: flex;
+    height: 65px;
+    background-color: #263238;
+    padding: 0 20px;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+}
+.logo {
+    display: inline-block;
+    height: 100%;
+    text-align: center;
+    
+}
+.logo h1 {
+    color: #d4ef25;
+    margin: 15px 10px;
+
+}
+.menu_items, .right_menu {
+    margin: auto 0px;
+}
+.menu_items ul {
+    display: flex;
+    list-style: none;
+}
+.menu_items ul li {
+    display: flex;
+    align-items: center;
+    margin: 0 10px;
+}
+.active {
+    color: #d4ef25;
+}
+
+.right_menu{
+    display: flex;
+    flex-wrap: nowrap;
+    height: 65px;
+}
+.right_menu a {
+    display: flex;
+    color: black;
+    text-align: center;
+    background-color: #d4ef25;
+    padding: 0 20px;
+    margin: 10px 0;
+    border-radius: 8px;
+}
+.right_menu a img {
+    margin: 10px 0;
+}
+.right_menu a span {
+    margin: 15px 0;
+    font-size: 15px;
+}
+
+
+footer {
+    padding: 20px 20px 20px 20px;
+    background-color: #263238;
+    margin-top: 80px;
+}
+.info_container {
+    width: 500px;
+}
+.footer_container {
+    display: flex;
+}
+.info_container .logo {
+    max-height: 70px;
+}
+.footer_company{
+    font-size: 14px;
+    color: #dfdfdf;
+    width: 400px;
+    margin-bottom: 30px;
+}
+.info_container .help {
+    display: flex;
+    flex-wrap: wrap;
+}
+.info_container .help span {
+    color: #dfdfdf;
+    margin-bottom: 10px;
+}
+.info_container .help a {
+    font-size: 16px;
+    color: #d4ef25;
+    margin-bottom: 5px;
+}
+.sotset {
+    margin-top: 0;
+}
+.sotset span {
+    color: #dfdfdf;
+}
+.sotset ul {
+    display: flex;
+    margin-top: 10px;
+}
+.sotset ul li {
+    margin-right: 20px;
+}
+.sotset ul li img {
+    width: 30px;
+    height: 30px;
+}
+.footer_container .info {
+    margin-top: 15px;
+    color: #dfdfdf;
+    margin-left: 50px;
+}
+.footer_container .info h2 {
+    margin-bottom: 20px;
+}
+.footer_container .info li {
+    margin-bottom: 4px;
+}
+.footer_container .info li a {
+    color: #d4ef25b1;
+}
+.footer_block {
+    display: flex;
+}
