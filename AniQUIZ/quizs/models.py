@@ -7,10 +7,11 @@ class cateory(models.Model):
     def __str__(self):
         return self.name[:20]
 
+
 class Quiz(models.Model):
     title = models.CharField(max_length=128)
-    imageScreensaver = models.ImageField(upload_to="static/img/quizs_img/imageScreensavers", null=True),
-    category = models.ForeignKey(cateory, on_delete=models.CASCADE)
+    imageScreensaver = models.ImageField(upload_to="static/img/quizs_img/imageScreensavers", null=True)
+    category = models.ForeignKey(cateory, on_delete=models.CASCADE, null=True)
 
     def __str__(self):
         return self.title[:20]

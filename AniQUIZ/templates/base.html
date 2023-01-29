@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="{% static 'css/base.css' %}">
     <link rel="stylesheet" href="{% static 'css/home.css' %}">
     <link rel="stylesheet" href="{% static 'css/quiz.css' %}">
+    <link rel="stylesheet" href="{% static 'css/add_quiz.css' %}">
 </head>
 <body>
     <header>
@@ -20,7 +21,7 @@
                     <li><a href="#" class="active">Главная</a></li>
                     <li><a href="#">Викторины</a></li>
                     <li><a href="#">Результаты</a></li>
-                    <li><a href="#">Предложить викторину</a></li>
+                    <li><a href="{% url 'add_quiz' %}">Предложить викторину</a></li>
                     <li><a href="#">FAQs</a></li>
                 </ul>
             </div>
@@ -33,7 +34,6 @@
 
     <div class="main_container">
       {% block content %}
-
       {% endblock content %}
     </div>
 

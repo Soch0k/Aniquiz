@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AniQUIZ</title>
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/home.css">
+    <link rel="stylesheet" href="css/quiz.css">
+</head>
+<body>
+    <header>
+        <div class="container_head">
+            <a href="#" class="logo"><h1>AniQUIZ</h1></a>
+
+            <div class="menu_items">
+                <ul>
+                    <li><a href="#" class="active">Главная</a></li>
+                    <li><a href="#">Викторины</a></li>
+                    <li><a href="#">Результаты</a></li>
+                    <li><a href="#">Предложить викторину</a></li>
+                    <li><a href="#">FAQs</a></li>
+                </ul>
+            </div>
+
+            <div class="right_menu">
+                <a href="#" class="login"><img src="img/icons-user-24.png" alt="иконка пользователя" width="24" height="24"><span>ВХОД</span></a>
+            </div>
+        </div>
+    </header>
+
+    <div class="main_container">
+        <div class="quiz_container" id="quiz_container">
+            <div class="navigation">
+                <a href="home.html">Вернуться</a>
+            </div>
+            <div class="card">
+                <a href="#"><img src="img/tests_images/47899679c157cb3b7fb73e2134086efb.jpg" alt="" width="500"></a>
+                <div class="block_card_info">
+                    <a href="#" class="author">
+                        <span class="avatar" wi></span>
+                        <p>Mugivara</p>
+                    </a>
+                </div>
+                <h3>
+                    Мой список самых привлекательных девушек [Mugivara]
+                </h3>
+                <p class="discription_card">Подписавшись на эстафету, теперь я показываю вам своих талантливых девушек из моего личного списка. Величайшие трудяжницы в сферах деятельности, которые очаровали меня своим манящим типажом!</p>
+                <div class="info_about_card">
+                    <div class="card_rating">
+                        <span></span>
+                        <div>9.0</div>
+                    </div>
+                </div>
+                <div class="start">
+                    <input type="button" class="start_quiz" id="start_quiz" value="Начать">
+                </div>
+            </div>
+        </div>
+        <div class="quiz_container_with_questions">
+            <div class="question_name">
+                Cопроводительный текст для вопроса
+            </div>
+            <img src="img/tests_images/47899679c157cb3b7fb73e2134086efb.jpg" alt="" width="100%">
+            <div class="answers_box">
+                <div class="answer">
+                    <input id="answer0" type="radio" name="ANSWER" value="0">
+                    <label class="ans" for="answer0">ответ 1</label>
+                </div>
+                <div class="answer">
+                    <input id="answer1" type="radio" name="ANSWER" value="1">
+                    <label class="ans" for="answer1">ответ 2</label>
+                </div>
+                <div class="answer">
+                    <input id="answer2" type="radio" name="ANSWER" value="2">
+                    <label class="ans" for="answer2">ответ 3</label>
+                </div>
+                <div class="answer">
+                    <input id="answer3" type="radio" name="ANSWER" value="3">
+                    <label class="ans" for="answer3">ответ 4</label>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+    <footer>
+        <div class="footer_container">
+            <div class="info_container">
+                <a href="#" class="logo"><h1>AniQUIZ</h1></a>
+
+                <p class="footer_company">
+                    сайт AniQUIZ был создан как курсовой проект с целью показать свои знания и возможностью его занести в портфолио. AniQUIZ это сайт с виктаринами по тематике аниме и манга
+                </p>
+                <div class="footer_block">
+                    <div class="help">
+                        <span>По всем вопросам:</span>
+                        <a href="#">AniQUIZ_Help@gmail.com</a>
+                        <a href="#">Ilya_Helper@gmail.com</a>
+                    </div>
+                    <div class="sotset">
+                        <span>Мы в сотсетях:</span>
+                        <ul>
+                            <li>
+                                <a href="#"><img src="img/sotset/free-icon-vk-24.png" alt=""></a>
+                            </li>
+                            <li>
+                                <a href="#"><img src="img/sotset/telegram-24.png" alt=""></a>
+                            </li>
+                            <li>
+                                <a href="#"><img src="img/sotset/youtube.png" alt=""></a>
+                            </li>
+                            <li>
+                                <a href="#"><img src="img/sotset/instagram-24.png" alt=""></a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="info">
+                <h2>Информация</h2>
+                <ul>
+                    <li><a href="#">Рекламные возможности</a></li>
+                    <li><a href="#">Пользовательское соглашение</a></li>
+                    <li><a href="#">Политика конфиденсальности</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+    <script src="js/quiz.js"></script>
+</body>
+</html>

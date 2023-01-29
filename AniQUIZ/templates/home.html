@@ -2,6 +2,7 @@
 
 {% block title %}AniQUIZ-Home{% endblock title %}
 {% block content %}
+{% load static %}
     <div class="popular_tests">
         <div class="popular_header">
             <div class="first_block">
@@ -15,7 +16,7 @@
         <div class="popular_container">
             <div class="cards">
                 <div class="card">
-                    <a href="quiz.html"><img src="img/tests_images/47899679c157cb3b7fb73e2134086efb.jpg" alt="" width="382"></a>
+                    <a href="quiz.html"><img src="{% static 'img/quizs_img/imageScreensavers/47899679c157cb3b7fb73e2134086efb.jpg' %}" alt="" width="382"></a>
                     <div class="block_card_info">
                         <a href="#" class="author">
                             <span class="avatar" wi></span>
