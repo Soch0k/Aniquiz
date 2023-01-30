@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 
 
 class cateory(models.Model):
@@ -9,9 +10,12 @@ class cateory(models.Model):
 
 
 class Quiz(models.Model):
-    title = models.CharField(max_length=128)
-    imageScreensaver = models.ImageField(upload_to="static/img/quizs_img/imageScreensavers", null=True)
-    category = models.ForeignKey(cateory, on_delete=models.CASCADE, null=True)
+    title = models.CharField(max_length=128, null=True, default='none')
+    imageScreensaver = models.ImageField(upload_to="static/img/quizs_img/imageScreensavers", null=True, default='static/img/quizs_img/imageScreensavers/47899679c157cb3b7fb73e2134086efb.jpg')
+    category = models.ForeignKey(cateory, on_delete=models.CASCADE, null=True, default=1)
+
+    def get_absolut_url(self):
+        return reverse('add_quiz_n', args=[str(self.id)])
 
     def __str__(self):
         return self.title[:20]

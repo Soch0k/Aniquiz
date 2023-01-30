@@ -5,42 +5,58 @@
 {% block content %}
 
     <div class="quiz_add_container">
-        <div class="category bl">
-            <h2>Выберите категорию</h2>
-            <input list="category">
-            <datalist id="category">
-                <option value="Anime">
-                <option value="Films">
-            </datalist>
-        </div>
-        <div class="image bl">
-            <h2>Выберите картинку</h2>
-            <img src="img/tests_images/47899679c157cb3b7fb73e2134086efb.jpg" alt="">
-            <input type="file">
-        </div>
-        <div class="questions bl">
-            <div class="question">
-                <div class="image">
-                    <label for="question_image1">Выберите картинку для вопроса</label>
-                    <img src="" alt="">
-                    <input type="file" id="question_image1">
-                </div>
-                <label for="question1">напишите здесь вопрос</label>
-                <input type="text" id="question1">
-                <div class="answers">
-                    <div class="answer_add">
-                        <label for="answer1">Напишите перый ответ</label>
-                        <input id="answer1" type="text">
-                        <label for="answer2">Напишите второй ответ</label>
-                        <input id="answer2" type="text">
+        {% if form %}
+            <div class="questions bl">
+                <div class="question">
+                    <div class="image">
+                        <label for="question_image1">Выберите картинку для вопроса</label>
+                        <img src="" alt="">
+                        <input type="file" id="question_image1">
                     </div>
-                    <button class="button">Добавить ещё ответ</button>
+                    <label for="question1">напишите здесь вопрос</label>
+                    <input type="text" id="question1">
+                    <div class="answers">
+                        <div class="answer_add">
+                            <label for="answer1">Напишите перый ответ</label>
+                            <input id="answer1" type="text">
+                            <label for="answer2">Напишите второй ответ</label>
+                            <input id="answer2" type="text">
+                        </div>
+                        <button class="button">Добавить ещё ответ</button>
+                    </div>
                 </div>
+                <button class="button">Добавить ещё вопрос</button>
             </div>
-            <button class="button">Добавить ещё вопрос</button>
-        </div>
-        <div class="button_save">
-            <a href="#" class="btn_save">Сохранить</a>
-        </div>
+            <div class="button_save">
+                <a methods="POST" href="#" class="btn_save">Сохранить</a>
+            </div>
+        {% else %}
+        <form action="" method="POST">
+            {% csrf_token %}
+            <div class="category bl">
+                <h2>Выберите категорию</h2>
+                <input list="category" name="category">
+                <datalist id="category">
+                    <option value="Anime">
+                    <option value="Films">
+                </datalist>
+            </div>
+            <div class="image bl">
+                <h2>Выберите картинку</h2>
+                <img src="img/tests_images/47899679c157cb3b7fb73e2134086efb.jpg" alt="">
+                <input type="file" name="imageScreensaver">
+            </div>
+            <div class="name bl">
+                <h2>Введите название</h2>
+                <input type="text" name="title">
+            </div>
+            <div class="button_add">
+                <button type="submit">123321123321</button>
+                <a type="submit" href="{% url 'add_quiz' %}" class="btn_add">Создать</a>
+            </div>
+        </form>
+        {% endif %}
     </div>
+
+
 {% endblock content %}

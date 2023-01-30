@@ -9,21 +9,30 @@ class AniquizListView(ListView):
 
 
 def quizCreateView(request):
-    form = forms.QuizForm
+    form = forms.QuizForm()
     errors = ''
+    data = {}
+    category = models.cateory
     if request.method == 'POST':
-        form = forms.QuizForm
+        form = forms.QuizForm(request.POST)
+
         if form.is_valid():
             form.save()
-            return redirect('home')
+            return redirect('add_quiz_n', models.Quiz.get_absolut_url())
         else:
             errors = form.errors
 
-    data = {
-        'form': form,
-        'errors': errors,
-    }
+        data = {
+            'form': form,
+            'errors': errors,
+        }
+    else:
+        data = {
+            'forma': form,
+            'errors': errors,
+        }
     return render(request, 'add_quiz.html', data)
+
 
 
 def addQuestion(request):

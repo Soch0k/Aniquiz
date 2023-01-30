@@ -1,0 +1,35 @@
+
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}AniQUIZ-Home{% endblock title %}
+{% block content %}
+
+    <div class="quiz_add_container">
+        <form action="" method="POST">
+            {% csrf_token %}
+            <div class="category bl">
+                <h2>Выберите категорию</h2>
+                <input list="category" name="category">
+                <datalist id="category">
+                    <option value="Anime">
+                    <option value="Films">
+                </datalist>
+            </div>
+            <div class="image bl">
+                <h2>Выберите картинку</h2>
+                <img src="img/tests_images/47899679c157cb3b7fb73e2134086efb.jpg" alt="">
+                <input type="file" name="imageScreensaver">
+            </div>
+            <div class="name bl">
+                <h2>Введите название</h2>
+                <input type="text" name="title">
+            </div>
+            <div class="button_add">
+                <button type="submit">123321123321</button>
+                <!--<a type="submit" href="{% url 'add_quiz' %}" class="btn_add">Создать</a>-->
+            </div>
+        </form>
+    </div>
+
+
+{% endblock content %}
