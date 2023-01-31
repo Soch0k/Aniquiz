@@ -8,11 +8,8 @@ class AniquizListView(ListView):
     template_name = "home.html"
 
 
-def quizCreateView(request, pk):
-    form = forms.QuizForm()
-    hui = forms.QuizForm.objects.filter(pk=pk)
+def quizCreateView(request):
     errors = ''
-    data = {}
     category = models.cateory
     if request.method == 'POST':
         form = forms.QuizForm(request.POST)
@@ -24,20 +21,21 @@ def quizCreateView(request, pk):
         else:
             errors = form.errors
 
-        data = {
-            'form': form,
-            'errors': errors,
-        }
-    else:
-        data = {
-            'forma': form,
-            'errors': errors,
-        }
+    data = {
+        'errors': errors,
+        'category': category,
+    }
     return render(request, 'add_quiz.html', data)
 
 
 def quizAdd_questions(request, pk):
-    form =
+    form = forms.QuizForm
+    data = {
+        'form': form
+
+    }
+    return render(request, 'add_quiz.html', data)
+
 
 
 def addQuestion(request):

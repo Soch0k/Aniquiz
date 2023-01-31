@@ -8,3 +8,5 @@ function hide_quiz_container() {
 BtnStart.addEventListener('click', (e) => {
     hide_quiz_container();
 });
+
+

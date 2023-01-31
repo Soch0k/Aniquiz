@@ -1,7 +1,7 @@
 
 {% extends 'base.html' %}
 {% load static %}
-{% block title %}AniQUIZ-Home{% endblock title %}
+{% block title %}QUIZ-add{% endblock title %}
 {% block content %}
 
     <div class="quiz_add_container">
@@ -16,16 +16,16 @@
                     <label for="question1">напишите здесь вопрос</label>
                     <input type="text" id="question1">
                     <div class="answers">
-                        <div class="answer_add">
-                            <label for="answer1">Напишите перый ответ</label>
+                        <div class="answer_add" id="answer_add_box">
+                            <label for="answer1">Напишите ответ 1</label>
                             <input id="answer1" type="text">
-                            <label for="answer2">Напишите второй ответ</label>
+                            <label for="answer2">Напишите ответ 2</label>
                             <input id="answer2" type="text">
                         </div>
-                        <button class="button">Добавить ещё ответ</button>
+                        <button id="btn_add_answer" class="button">Добавить ещё ответ</button>
                     </div>
                 </div>
-                <button class="button">Добавить ещё вопрос</button>
+                <button id="btn_add_question" class="button">Добавить ещё вопрос</button>
             </div>
             <div class="button_save">
                 <a methods="POST" href="#" class="btn_save">Сохранить</a>
@@ -57,6 +57,7 @@
         </form>
         {% endif %}
     </div>
+    <script src="js/add_quiz.js"></script>
 
 
 {% endblock content %}
