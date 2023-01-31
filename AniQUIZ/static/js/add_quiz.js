@@ -39,3 +39,23 @@ btn_add_answer.addEventListener('click', (e) => {
 });
 
 
+
+    
+function addquestions () {
+    for(let i = 0; i < document.getElementById('form_question').children.length-1; i++) {
+    
+        var formData = new FormData();
+        for (let k = 0; k < array.length; k++) {
+            const element = array[k];
+            
+        }
+    
+    
+        
+    }
+}
+
+$(document).on('click', '#form_question', function(e) {
+    addquestions();
+})
+

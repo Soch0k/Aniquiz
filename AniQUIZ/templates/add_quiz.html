@@ -6,30 +6,37 @@
 
     <div class="quiz_add_container">
         {% if form %}
-            <div class="questions bl">
-                <div class="question">
-                    <div class="image">
-                        <label for="question_image1">Выберите картинку для вопроса</label>
-                        <img src="" alt="">
-                        <input type="file" id="question_image1">
-                    </div>
-                    <label for="question1">напишите здесь вопрос</label>
-                    <input type="text" id="question1">
-                    <div class="answers">
-                        <div class="answer_add" id="answer_add_box">
-                            <label for="answer1">Напишите ответ 1</label>
-                            <input id="answer1" type="text">
-                            <label for="answer2">Напишите ответ 2</label>
-                            <input id="answer2" type="text">
+            <form id="form_question">
+                {% csrf_token %}
+                <div class="questions bl">
+                    <div class="question">
+                        <div class="image">
+                            <label for="question_image1">Выберите картинку для вопроса</label>
+                            <img src="" alt="">
+                            <input type="file" id="question_image1">
                         </div>
-                        <button id="btn_add_answer" class="button">Добавить ещё ответ</button>
+                        <label for="question1">напишите здесь вопрос</label>
+                        <input type="text" id="question1">
+                        <div class="answers">
+                            <div class="answer_add" id="answer_add_box">
+                                <label for="answer1">Напишите ответ 1</label>
+                                <input id="answer1" type="text">
+                                <label for="answer2">Напишите ответ 2</label>
+                                <input id="answer2" type="text">
+                            </div>
+                            <button id="btn_add_answer" class="button">Добавить ещё ответ</button>
+                        </div>
                     </div>
+                    <button id="btn_add_question" class="button">Добавить ещё вопрос</button>
                 </div>
-                <button id="btn_add_question" class="button">Добавить ещё вопрос</button>
-            </div>
-            <div class="button_save">
-                <a methods="POST" href="#" class="btn_save">Сохранить</a>
-            </div>
+
+                <div class="button_save">
+                    <button methods="POST" id="btn_save" class="btn_save">Сохранить</button>
+                </div>
+            </form>
+
+
+            
         {% else %}
         <form action="" method="POST">
             {% csrf_token %}
