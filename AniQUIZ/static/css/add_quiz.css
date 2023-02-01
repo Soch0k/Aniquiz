@@ -51,6 +51,14 @@ input[type="file"] {
 .answer_add input {
     margin-bottom: 20px;
 }
+.answer_add input[type='checkbox'] {
+    display: flex;
+    margin-top: -15px;
+    margin-left: 220px;
+}
+.answer_add label {
+    display: flex;
+}
 .button_save, .button_add {
     width: 120px;
     height: 40px;
@@ -68,4 +76,34 @@ input[type="file"] {
     border-radius: 5px;
     color: black;
     background-color: #d4ef25;
+}
+.answer_add input[type="radio"] {
+    display: block;
+}
+.is_correct {
+    font-size: 14px;
+    display: flex;
+    margin-left: 350px;
+    margin-top: -23px;
+}
+.btn_add_answers {
+    display: flex;
+    width: 170px;
+    height: 40px;
+    align-items: center;
+    justify-content: center;
+
+    margin: 0 auto;
+    
+    border-radius: 5px;
+    color: black;
+    background-color: #d4ef25;
+}
+.btn_add_answers_box {
+    display: flex;
+    width: 170px;
+    height: 40px;
+
+    margin: 0 auto;
+    margin-top: 40px;
 }

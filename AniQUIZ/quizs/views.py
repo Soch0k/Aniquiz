@@ -34,7 +34,20 @@ def quizAdd_questions(request, pk):
         'form': form
 
     }
+    if request.method == 'POST':
+        formQestion = forms.questionForm(request.POST)
+        if formQestion.is_valid():
+            post = formQestion.save(commit=False)
+            post.save()
+            return redirect('add_quiz_answers', pk=post.pk)
+
     return render(request, 'add_quiz.html', data)
+
+def quizAdd_answers(request, pk):
+
+    if request.method == 'POST':
+        add_answer = forms.answerForm(request.POST)
+
 
 
 

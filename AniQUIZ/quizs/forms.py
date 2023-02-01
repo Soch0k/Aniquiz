@@ -31,3 +31,10 @@ class questionForm(ModelForm):
         model = models.questions
 
         fields = ['id', 'question', 'image', 'quiz']
+
+
+class answerForm(ModelForm):
+    class Meta:
+        model = models.answers
+
+        fields = ['answer', 'correct', 'questions']
