@@ -9,38 +9,37 @@
         {% if form %}
             <div id="form_question">
                 <div class="questions bl">
-                    <div class="question">
+
+                    <form class="question" method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <label for="question1">напишите здесь вопрос</label>
+                        <input type="text" id="question1" name="question">
+                        {{req}}
                         <div class="image">
                             <label for="question_image1">Выберите картинку для вопроса</label>
                             <img src="" alt="">
-                            <input type="file" id="question_image1">
+                            <--{{form.image}}-->
+                            <!--<input type="file" id="question_image1" name="image">-->
                         </div>
-                        <label for="question1">напишите здесь вопрос</label>
-                        <input type="text" id="question1">
-            <!--
-                        <div class="answers">
-                            <div class="answer_add" id="answer_add_box">
-                                <label for="answer1">Напишите ответ 1</label>
-                                <label for="correct_answer_1" class="is_correct">ответ правильный?</label>
-                                <input type="checkbox" id="correct_answer_1" name='correct'>
-                                <input id="answer1" type="text" name='title'>
 
-                                <label for="answer2">Напишите ответ 2</label>
-                                <label for="correct_answer_2" class="is_correct">ответ правильный?</label>
-                                <input type="checkbox" id="correct_answer_2">
-                                <input id="answer2" type="text">
-                            </div>
-                            <button id="btn_add_answer" class="button">Добавить ответ</button>
+                        <div class="btn_add_answers_boX">
+                            <button type="submit" class="btn_add_answers">Создать ответы</button>
                         </div>
-            -->
-                    <div class="btn_add_answers_boX">
-                        <a href="#" class="btn_add_answers">Создать ответы</a>
-                    </div>
+
+
+
+                        <input hidden value="{{ quiz_pk }}" name="quiz">
+
+
+                        {% for errors in errors %}
+                        {{ errors }}<br>
+                        {% endfor %}
+
+                    </form>
                     <button id="btn_add_question" class="button">Добавить вопрос</button>
-                </div>
-
                 <div class="button_save">
-                    <button methods="POST" id="btn_save" class="btn_save">Сохранить</button>
+                    <button id="btn_save" class="btn_save">Сохранить</button>
+                </div>
                 </div>
             </div>
 
@@ -71,7 +70,7 @@
                 <a href="{% url 'add_quiz' %}" class="btn_add">Создать</a>
             </div>
         </form>
-            
+
         {% endif %}
 
 

@@ -30,7 +30,7 @@ class questionForm(ModelForm):
     class Meta:
         model = models.questions
 
-        fields = ['id', 'question', 'image', 'quiz']
+        fields = ['question', 'image', 'quiz']
 
 
 class answerForm(ModelForm):

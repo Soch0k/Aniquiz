@@ -1,0 +1,30 @@
+
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}QUIZ-add-answer{% endblock title %}
+
+{% block content %}
+
+    <div class="quiz_add_container">
+
+        <form method="POST" class="answers">
+            <div class="answer_add" id="answer_add_box">
+                <label for="answer1">Напишите ответ 1</label>
+                <label for="correct_answer_1" class="is_correct">ответ правильный?</label>
+                <input type="checkbox" id="correct_answer_1" name='correct'>
+                <input id="answer1" type="text" name='title'>
+
+                <label for="answer2">Напишите ответ 2</label>
+                <label for="correct_answer_2" class="is_correct">ответ правильный?</label>
+                <input type="checkbox" id="correct_answer_2">
+                <input id="answer2" type="text">
+            </div>
+            <button id="btn_add_answer" class="button">Добавить ответ</button>
+        </form>
+
+
+    </div>
+
+
+
+{% endblock content %}
