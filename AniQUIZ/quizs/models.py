@@ -21,7 +21,7 @@ class Quiz(models.Model):
         return self.title[:20]
 
 
-class questions(models.Model):
+class Questions(models.Model):
     question = models.CharField(max_length=64)
     image = models.ImageField(upload_to="static/img/quizs_img/questions_img", null=True)
     quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE)
@@ -33,7 +33,7 @@ class questions(models.Model):
 class answers(models.Model):
     answer = models.CharField(max_length=128)
     correct = models.BooleanField()
-    questions = models.ForeignKey(questions, on_delete=models.CASCADE)
+    question_pk = models.ForeignKey(Questions, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.answer[:20]

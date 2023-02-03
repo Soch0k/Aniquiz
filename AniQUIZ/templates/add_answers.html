@@ -6,23 +6,26 @@
 {% block content %}
 
     <div class="quiz_add_container">
-
+        <input hidden id="pk_question" type="text" value="{{pk_question}}" name="pk_question">
         <form method="POST" class="answers">
+            {% csrf_token %}
             <div class="answer_add" id="answer_add_box">
+
                 <label for="answer1">Напишите ответ 1</label>
                 <label for="correct_answer_1" class="is_correct">ответ правильный?</label>
-                <input type="checkbox" id="correct_answer_1" name='correct'>
+                <input type="checkbox" id="correct_answer_1" name='correct' value="1">
                 <input id="answer1" type="text" name='title'>
+
+
 
                 <label for="answer2">Напишите ответ 2</label>
                 <label for="correct_answer_2" class="is_correct">ответ правильный?</label>
-                <input type="checkbox" id="correct_answer_2">
+                <input type="checkbox" id="correct_answer_2" value="1">
                 <input id="answer2" type="text">
             </div>
-            <button id="btn_add_answer" class="button">Добавить ответ</button>
+            <button type="submit">сохранить</button>
+            <a id="btn_add_answer" class="button">Добавить ответ</a>
         </form>
-
-
     </div>
 
 

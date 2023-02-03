@@ -35,10 +35,8 @@ def quizAdd_questions(request, pk):
     errors = ''
     if request.method == 'POST':
         formQestion = forms.questionForm(request.POST, request.FILES)
-        req=request.FILES
         if formQestion.is_valid():
-            post = formQestion.save(commit=False, )
-            post.quiz = pk
+            post = formQestion.save(commit=False)
             post.save()
             return redirect('add_quiz_answers', pk=post.pk)
         else:
@@ -47,7 +45,6 @@ def quizAdd_questions(request, pk):
         'form': form,
         'errors': errors,
         'quiz_pk': pk,
-        'req': req,
     }
     return render(request, 'add_quiz.html', data)
 
@@ -62,17 +59,23 @@ def quizAdd_questions(request, pk):
 def quizAdd_answers(request, pk):
 
     errors = ''
-    add_answer = models.answers.objects.filter(pk=pk)
+
     if request.method == 'POST':
-        add_answer_form = forms.answerForm(request.POST)
-        if add_answer_form.is_valid():
-            add_answer_form.save()
-            quiz_pk = models.questions.objects.filter(pk=pk)
-            return redirect('add_quiz_n', pk=quiz_pk[1].pk)
+        answer = request.POST.get('answer')
+        correct = request.POST.get('correct')
+        question_pk = request.POST.get('question_pk')
+
+        post = models.answers.objects.create(
+            answer=answer,
+            correct=correct,
+            question_pk=question_pk,
+        )
+        if post.is_valid():
+            post.save()
+            return redirect('home', question_pk)
         else:
-            errors = add_answer.errors
+            errors = post.errors
     data = {
-        'add_answer': add_answer,
         'errors': errors,
         'pk_question': pk,
     }

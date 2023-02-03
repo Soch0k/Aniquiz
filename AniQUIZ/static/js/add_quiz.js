@@ -47,20 +47,31 @@ btn_add_answer.addEventListener('click', (e) => {
 
 
 function addquestions () {
-    for(let i = 0; i <document.getElementById('form_question').children.length-1; i++) {
-        let formData_question = new FormData();
-        
-        for (let k = 0; k < document.getElementById('answer_add_box').children.length; k++) {
-            let formData_answer = new FormData();
-            let id_name = 'answer' + k;
-            
+    let pk =
 
+    for (let k = 1; k < document.getElementById('answer_add_box').children.length+1; k++) {
+        let formData_answer = new FormData();
+        let id_name = 'answer' + k;
+        let correct_answer = 'correct_answer_' + k;
+        formData_answer.append('answer', $('#id_name').val());
+        formData_answer.append('correct', $('#correct_answer').val());
+        formData_answer.append('question_pk', $('#pk_question').val());
 
-
-        }
-    
-    
-        
+        $.ajax({
+            type: 'POST',
+            url: "{% url 'add_quiz_answers'  %}",
+            data: formData_answer,
+            cache: false,
+            processData: false,
+            contentType: false,
+            enctype: 'multipart/form-data',
+            success: function (){
+                alert('the post has been created')
+            },
+            error: function(xhr, errmsg, err) {
+                console.log(xhr.status + ":" + xhr.responseText)
+            },
+        })
     }
 }
 

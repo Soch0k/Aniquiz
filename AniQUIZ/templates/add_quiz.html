@@ -18,17 +18,19 @@
                         <div class="image">
                             <label for="question_image1">Выберите картинку для вопроса</label>
                             <img src="" alt="">
-                            <--{{form.image}}-->
+                            {{ form.image }}
                             <!--<input type="file" id="question_image1" name="image">-->
                         </div>
-
+                        <select name="quiz" hidden>
+                            <option value="{{ quiz_pk }}">{{ quiz_pk }}</option>
+                        </select>
                         <div class="btn_add_answers_boX">
                             <button type="submit" class="btn_add_answers">Создать ответы</button>
                         </div>
 
 
 
-                        <input hidden value="{{ quiz_pk }}" name="quiz">
+                        <!--<input hidden value="{{ quiz_pk }}" name="quiz">-->
 
 
                         {% for errors in errors %}
@@ -46,7 +48,7 @@
 
             
         {% else %}
-        <form action="" method="POST">
+        <form action="" method="POST" enctype="multipart/form-data">
             {% csrf_token %}
             <div class="category bl">
                 <h2>Выберите категорию</h2>
@@ -66,8 +68,8 @@
                 <input type="text" name="title">
             </div>
             <div class="button_add">
-                <button type="submit">123321123321</button>
-                <a href="{% url 'add_quiz' %}" class="btn_add">Создать</a>
+                <button type="submit" class="btn_add">Создать</button>
+                <!--<a href="{% url 'add_quiz' %}" class="btn_add">Создать</a>-->
             </div>
         </form>
 

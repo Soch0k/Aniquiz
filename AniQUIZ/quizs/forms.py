@@ -28,7 +28,7 @@ class QuizForm(ModelForm):
 
 class questionForm(ModelForm):
     class Meta:
-        model = models.questions
+        model = models.Questions
 
         fields = ['question', 'image', 'quiz']
 
@@ -37,4 +37,4 @@ class answerForm(ModelForm):
     class Meta:
         model = models.answers
 
-        fields = ['answer', 'correct', 'questions']
+        fields = ['answer', 'correct', 'question_pk']
