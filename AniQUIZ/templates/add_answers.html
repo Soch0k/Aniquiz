@@ -12,26 +12,27 @@
 
     <div class="quiz_add_container">
         <input hidden id="pk_question" type="text" value="{{pk_question}}" name="pk_question">
-        <div method="POST" class="answers">
+        <div id="response">хуй</div>
+        <form method="POST" class="answers" name="answerForm">
             {% csrf_token %}
             <div class="answer_add" id="answer_add_box">
-                <div class="qns">
+                <div class="ans">
                     <label for="answer1">Напишите ответ 1</label>
                     <label for="correct_answer_1" class="is_correct">ответ правильный?</label>
-                    <input type="checkbox" id="correct_answer_1" name='correct' value="1">
-                    <input id="answer1" type="text">
+                    <input type="radio" id="correct_answer_1" name='correct'>
+                    <input id="answer1" type="text" name="answer">
                 </div>
 
                 <div class="ans">
                     <label for="answer2">Напишите ответ 2</label>
                     <label for="correct_answer_2" class="is_correct">ответ правильный?</label>
-                    <input id="correct_answer_2" type="checkbox" value="1">
+                    <input id="correct_answer_2" type="radio" name='correct'>
                     <input id="answer2" type="text">
                 </div>
             </div>
             <button id="btn_save" type="submit">сохранить</button>
 
-        </div>
+        </form>
         <button id="btn_add_answer" class="button btn_add_answer">Добавить ответ</button>
     </div>
 

@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.views.generic import ListView
 from django.views import generic
 from django.urls import reverse_lazy
+from django.http import HttpResponse
 from . import models, forms
 
 
@@ -49,42 +50,48 @@ def quizAdd_questions(request, pk):
     return render(request, 'add_quiz.html', data)
 
 
-#class quizAdd_questions(generic.CreateView):
+# class quizAdd_questions(generic.CreateView):
 #    form_class =forms.questionForm
 #    success_url = reverse_lazy('add_quiz_answers')
 #    template_name = 'add_quiz.html'
 
 
-
 def quizAdd_answers(request, pk):
-
     errors = ''
 
-    #if request.method == 'POST':
-    #    answer = request.POST.get('answer')
-    #    correct = request.POST.get('correct')
-    #    question_pk = request.POST.get('question_pk')
-#
-    #    for i in request.POST.get('quantity'):
-    #        answer = request.POST.get('answer')
-#
-#
-    #    post = models.answers.objects.create(
-    #        answer=answer,
-    #        correct=correct,
-    #        question_pk_id=pk,
-    #    )
-#
-    #    post.save()
-    #    return redirect('home')
+    if request.method == 'POST':
+        inp = request.POST.get('answer')
+        inp = 'хуй соси'
 
+        return HttpResponse(inp)
+
+
+        # answer = request.POST.get('answer')
+        # correct = request.POST.get('correct')
+        # question_pk = request.POST.get('question_pk')
+
+        # for i in request.POST.get('quantity'):
+        #    post = models.answers.objects.create(
+        #        answer=request.POST.get('answer' + str(i)),
+        #        correct=1,
+        #        question_pk=request.POST.get('question_pk' + str(i)),
+        #    )
+
+
+        # post = models.answers.objects.create(
+        #    answer=answer,
+        #    correct=correct,
+        #    question_pk_id=pk,
+        # )
+        #
+        # post.save()
+        # return redirect('home')
 
     data = {
         'errors': errors,
         'pk_question': pk,
     }
     return render(request, 'add_answers.html', data)
-
 
 
 def addQuestion(request):

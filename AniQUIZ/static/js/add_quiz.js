@@ -20,7 +20,8 @@ function add_answer () {
         answer_input.id = 'answer' + (answers_add_box.children.length+1);
 
         let answer_correct_check = document.createElement('input');
-        answer_correct_check.type = 'checkbox';
+        answer_correct_check.type = 'radio';
+        answer_correct_check.name = 'correct';
         answer_correct_check.id = "is_correct" + (answers_add_box.children.length+1) ;
 
         div_ans.append(answer_laber);
@@ -80,39 +81,82 @@ $(document).on('click', '#btn_add_answer', function(e) {
 //    }
 //}
 
-$(document).on('click', '#btn_save', function(e) {
-    const answers_add_box = document.getElementById('answer_add_box');
-    for (let i = 1; i < answers_add_box.children.length+1; i++) {
-        let formData_answer = new FormData();
-        let id_name = 'answer' + i;
-        let correct_answer = 'correct_answer_' + i;
-        
+var serverResponse = document.querySelector('#response')
 
-        console.log(id_name)
+document.forms.answerForm.onsubmit = function() {
+    e.preventDefault();
+    var answers_add_box = document.getElementById('answer_add_box');
 
+    var question = $('#pk_question').val();
 
-        formData_answer.append('quantity', $(answers_add_box.children.length));
-        formData_answer.append(id_name, $('answer'+i).val());
-        formData_answer.append(correct_answer, $(correct_answer).val());
-        formData_answer.append('question_pk', $('#pk_question').val());
+    console.log(question);
 
-        //$.ajax({
-        //    type: 'POST',
-        //    url: "{% url 'add_quiz_answers'  %}",
-        //    data: formData_answer,
-        //    cache: false,
-        //    processData: false,
-        //    contentType: false,
-        //    enctype: 'multipart/form-data',
-        //    success: function (){
-        //        alert('the post has been created')
-        //    },
-        //    error: function(xhr, errmsg, err) {
-        //        //console.log(xhr.status + ":" + xhr.responseText)
-        //    },
-        //})
+    var formData_answer = new FormData(document.forms.answerForm);
+
+    //for (let i = 1; i < answers_add_box.children.length+1; i++) {
+    //    let answer = 'answer'+i;
+    //    let answer_id = '#answer'+i;
+    //
+    //
+    //    console.log($(answer_id).val())
+    //
+    //    formData_answer.append(answer, $(answer_id).val())
+    //
+    //}
+    var xhr = new XMLHttpRequest();
+
+    xhr.open('POST', "{% url 'add_quiz_answers' %}");
+
+    xhr.setRequestHeader('Content-Type', 'application/x-www-urlencoded')
+
+    xhr.onreadystatechange = function() {
+        if(xhr.readyState === 4 && xhr.status === 200) {
+            serverResponse.textContent = xhr.responseText
+        }
     }
 
+    xhr.send('answer', $('#answer1'));
 
-})
+};
+
+//$(document).on('click', '#btn_save', function(e) {
+//    const answers_add_box = document.getElementById('answer_add_box');
+//    let formData_answer = new FormData();
+//    for (let i = 1; i < answers_add_box.children.length+1; i++) {
+//
+//        let id_name = '#answer' + i;
+//        let correct_answer = '#correct_answer_' + i;
+//
+//
+//        console.log(id_name)
+//        console.log($(id_name).val())
+//        console.log($(correct_answer).val())
+//        console.log(answers_add_box.children.length)
+//
+//
+//        formData_answer.append('popit', $('#answer1').val());
+//        formData_answer.append(correct_answer, $(correct_answer).val());
+//        formData_answer.append('question_pk', $('#pk_question').val());
+//
+//
+//    }
+//    formData_answer.append('quantity', $(answers_add_box.children.length));
+//    $.ajax({
+//         type: 'POST',
+//         url: "{% url 'add_quiz_answers' %}",
+//         data: formData_answer,
+//         cache: false,
+//         processData: false,
+//         contentType: false,
+//         enctype: 'multipart/form-data',
+//         success: function (){
+//             alert('the post has been created')
+//         },
+//         error: function(xhr, errmsg, err) {
+//             //console.log(xhr.status + ":" + xhr.responseText)
+//         },
+//    })
+//    console.log(formData_answer)
+//
+//})
 
