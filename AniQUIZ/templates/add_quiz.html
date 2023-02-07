@@ -9,6 +9,16 @@
         {% if form %}
             <div id="form_question">
                 <div class="questions bl">
+                    {% for question in questions %}
+                        <div class="question">
+                            <h3>Вопрос:</h3>
+                            <p>{{ question.question }}</p>
+                            <h3>Картинка:</h3>
+                            <img src="{{ question.image }}">
+                        </div>
+                    {% endfor %}
+                </div>
+                <div class="questions bl">
 
                     <form class="question" method="POST" enctype="multipart/form-data">
                         {% csrf_token %}

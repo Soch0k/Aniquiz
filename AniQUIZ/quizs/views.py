@@ -4,6 +4,7 @@ from django.views import generic
 from django.urls import reverse_lazy
 from django.http import HttpResponse
 from . import models, forms
+import json
 
 
 class AniquizListView(ListView):
@@ -43,6 +44,7 @@ def quizAdd_questions(request, pk):
         else:
             errors = formQestion.errors
     data = {
+        'questions': models.Questions.objects.filter(quiz=pk),
         'form': form,
         'errors': errors,
         'quiz_pk': pk,
@@ -60,10 +62,33 @@ def quizAdd_answers(request, pk):
     errors = ''
 
     if request.method == 'POST':
-        inp = request.POST.get('answer')
-        inp = 'хуй соси'
+        inp = 'ичто ты смотришь сюда?'
+        print(request.POST)
+        print(len(request.POST))
 
-        return HttpResponse(inp)
+        req = request.POST
+
+        for key in request.POST:
+            print(req[key])
+            if key[:-1] == 'answer':
+                if key == req['correct']:
+                    post = models.answers.objects.create(
+                        answer=req[key],
+                        question_pk_id=pk,
+                        correct=1,
+                    )
+                    post.save()
+                else:
+                    post = models.answers.objects.create(
+                        answer=req[key],
+                        question_pk_id=pk,
+                        correct=0,
+                    )
+                    post.save()
+
+
+        #pk_qst =
+        return redirect('add_quiz_n', pk)
 
 
         # answer = request.POST.get('answer')
@@ -88,7 +113,6 @@ def quizAdd_answers(request, pk):
         # return redirect('home')
 
     data = {
-        'errors': errors,
         'pk_question': pk,
     }
     return render(request, 'add_answers.html', data)

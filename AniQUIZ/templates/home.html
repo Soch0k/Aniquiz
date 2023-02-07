@@ -15,6 +15,27 @@
         </div>
         <div class="popular_container">
             <div class="cards">
+                {% for i in object_list %}
+                    <div class="card">
+                    <a href="quiz.html"><img src="{{i.imageScreensaver.url}}" alt="" width="382"></a>
+                    <div class="block_card_info">
+                        <a href="#" class="author">
+                            <span class="avatar" wi></span>
+                            <p>Mugivara</p>
+                        </a>
+                    </div>
+                    <h3>
+                        <a href="#">Мой список самых привлекательных девушек [Mugivara]</a>
+                    </h3>
+                    <p class="discription_card">Подписавшись на эстафету, теперь я показываю вам своих талантливых девушек из моего личного списка. Величайшие трудяжницы в сферах деятельности, которые очаровали меня своим манящим типажом!</p>
+                    <div class="info_about_card">
+                        <div class="card_rating">
+                            <span></span>
+                            <div>9.0</div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
                 <div class="card">
                     <a href="quiz.html"><img src="{% static 'img/quizs_img/imageScreensavers/47899679c157cb3b7fb73e2134086efb.jpg' %}" alt="" width="382"></a>
                     <div class="block_card_info">

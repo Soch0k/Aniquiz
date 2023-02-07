@@ -4,7 +4,7 @@ function add_answer () {
     if (answers_add_box.children.length !== 6) {
         let answer_laber = document.createElement('label');
         answer_laber.className = 'answer' + (answers_add_box.children.length   + 1);
-        answer_laber.for = 'answer' + answers_add_box.children.length ;
+        answer_laber.setAttribute('for', 'answer' + (answers_add_box.children.length+1));
         answer_laber.innerHTML = 'напишите ответ ' + (answers_add_box.children.length  + 1);
 
         let div_ans = document.createElement('div');
@@ -18,11 +18,13 @@ function add_answer () {
 
         let answer_input = document.createElement('input');
         answer_input.id = 'answer' + (answers_add_box.children.length+1);
+        answer_input.name = 'answer' + (answers_add_box.children.length+1);
 
         let answer_correct_check = document.createElement('input');
         answer_correct_check.type = 'radio';
-        answer_correct_check.name = 'correct';
-        answer_correct_check.id = "is_correct" + (answers_add_box.children.length+1) ;
+        answer_correct_check.name = "correct";
+        answer_correct_check.value = 'answer' + (answers_add_box.children.length+1);
+        answer_correct_check.id = "is_correct" + (answers_add_box.children.length+1);
 
         div_ans.append(answer_laber);
         div_ans.append(answer_is_correct);
@@ -41,13 +43,6 @@ function add_answer () {
 
 $(document).on('click', '#btn_add_answer', function(e) {
     add_answer();
-    const answers_add_box = document.getElementById('answer_add_box');
-    for (let i = 1; i < answers_add_box.children.length+1; i++) {
-
-        let id_name = 'answer' + i;
-        console.log(id_name)
-    }
-
 })
 
 
@@ -89,23 +84,11 @@ document.forms.answerForm.onsubmit = function() {
 
     var question = $('#pk_question').val();
 
-    console.log(question);
-
-    var formData_answer = new FormData(document.forms.answerForm);
-
-    //for (let i = 1; i < answers_add_box.children.length+1; i++) {
-    //    let answer = 'answer'+i;
-    //    let answer_id = '#answer'+i;
-    //
-    //
-    //    console.log($(answer_id).val())
-    //
-    //    formData_answer.append(answer, $(answer_id).val())
-    //
-    //}
     var xhr = new XMLHttpRequest();
 
     xhr.open('POST', "{% url 'add_quiz_answers' %}");
+
+    var formData = new FormData(document.forms.answerForm);
 
     xhr.setRequestHeader('Content-Type', 'application/x-www-urlencoded')
 
@@ -115,7 +98,9 @@ document.forms.answerForm.onsubmit = function() {
         }
     }
 
-    xhr.send('answer', $('#answer1'));
+
+
+    xhr.send(formData_answer);
 
 };
 
