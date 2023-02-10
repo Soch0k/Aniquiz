@@ -30,10 +30,10 @@ class Questions(models.Model):
         return self.question[:20]
 
 
-class answers(models.Model):
+class Answers(models.Model):
     answer = models.CharField(max_length=128, null=True)
     correct = models.BooleanField()
     question_pk = models.ForeignKey(Questions, on_delete=models.CASCADE)
 
-    #def __str__(self):
-    #    return self.answer[:20]
+    def __str__(self):
+        return self.answer[:20]

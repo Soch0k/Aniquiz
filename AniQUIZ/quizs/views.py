@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.views.generic import ListView
 from django.views import generic
 from django.urls import reverse_lazy
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from . import models, forms
 import json
 
@@ -72,24 +72,22 @@ def quizAdd_answers(request, pk):
             print(req[key])
             if key[:-1] == 'answer':
                 if key == req['correct']:
-                    post = models.answers.objects.create(
+                    post = models.Answers.objects.create(
                         answer=req[key],
                         question_pk_id=pk,
                         correct=1,
                     )
                     post.save()
                 else:
-                    post = models.answers.objects.create(
+                    post = models.Answers.objects.create(
                         answer=req[key],
                         question_pk_id=pk,
                         correct=0,
                     )
                     post.save()
 
-
-        #pk_qst =
+        # pk_qst =
         return redirect('add_quiz_n', pk)
-
 
         # answer = request.POST.get('answer')
         # correct = request.POST.get('correct')
@@ -101,7 +99,6 @@ def quizAdd_answers(request, pk):
         #        correct=1,
         #        question_pk=request.POST.get('question_pk' + str(i)),
         #    )
-
 
         # post = models.answers.objects.create(
         #    answer=answer,
@@ -133,3 +130,37 @@ def addQuestion(request):
         'form': form,
     }
     return render(request, 'add_quiz.html', data)
+
+
+def is_ajax(request):
+    return request.META.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest'
+
+
+def quizView(request, pk):
+
+
+
+    form = models.Quiz.objects.filter(pk=pk)
+    questions = models.Questions.objects.filter(quiz=form[0].pk)
+    answers = models.Answers.objects.filter(question_pk=questions[0].id)
+    data = {
+        'quiz': form,
+        'questions': questions,
+        'answers': answers,
+    }
+
+
+
+
+    return render(request, 'quiz.html', data)
+
+def returnThisQuestion(request, quiz, num):
+
+    if is_ajax(request=request):
+        question = models.Questions.objects.filter(quiz=quiz)
+        answers = models.Answers.objects.filter(question_pk=question[0].id)
+        data = {
+            'questions': list(question),
+            'answer': list(answers),
+        }
+        return redirect(data)

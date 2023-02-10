@@ -15,9 +15,9 @@
         </div>
         <div class="popular_container">
             <div class="cards">
-                {% for i in object_list %}
+                {% for i in object_list|slice:":6" %}
                     <div class="card">
-                    <a href="quiz.html"><img src="{{i.imageScreensaver.url}}" alt="" width="382"></a>
+                    <a href="{% url 'quiz' i.pk %}"><img src="{{i.imageScreensaver.url}}" alt="" width="382"></a>
                     <div class="block_card_info">
                         <a href="#" class="author">
                             <span class="avatar"></span>
@@ -25,7 +25,7 @@
                         </a>
                     </div>
                     <h3>
-                        <a href="#">Мой список самых привлекательных девушек [Mugivara]</a>
+                        <a href="{% url 'quiz' i.pk %}">Мой список самых привлекательных девушек [Mugivara]</a>
                     </h3>
                     <p class="discription_card">Подписавшись на эстафету, теперь я показываю вам своих талантливых девушек из моего личного списка. Величайшие трудяжницы в сферах деятельности, которые очаровали меня своим манящим типажом!</p>
                     <div class="info_about_card">

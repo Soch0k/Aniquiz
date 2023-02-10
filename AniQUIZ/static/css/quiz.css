@@ -21,6 +21,7 @@
     width: 800px;
     margin: 0 auto;
     height: 30px;
+
 }
 .navigation a {
     text-align: center;
@@ -83,10 +84,11 @@
     max-width: 900px;
     margin: 0 auto;
     background-color: #263238;
+    display: none;
 
 }
 .answers_box {
-    margin: 0 30px;
+
 }
 .question_name {
     font-size: 26px;
@@ -97,14 +99,16 @@
     color: white;
     text-align: center;
     width: 100%;
+    padding-bottom: 25px;
 }
 input[type=radio] {
     display: none;
 }
 .answer {
-    margin: 2px 0;
+    margin: 2px 10px;
+
     background-color: #3A454B;
-    height: 150px;
+    height: 70px;
 }
 .answer:hover {
     color: #d4ef25;

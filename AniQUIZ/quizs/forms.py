@@ -35,6 +35,6 @@ class questionForm(ModelForm):
 
 class answerForm(ModelForm):
     class Meta:
-        model = models.answers
+        model = models.Answers
 
         fields = ['answer', 'correct', 'question_pk']
