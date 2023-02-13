@@ -4,7 +4,6 @@
 {% block content %}
 {% load static %}
     {% for quiz in quiz %}
-<button id="blat_gde">blat_dai_mne_datu</button>
         <div class="quiz_container" id="quiz_container">
             <div class="navigation">
                 <a href="home.html">Вернуться</a>
@@ -29,32 +28,20 @@
                     </div>
                 </div>
                 <div class="start">
-                    <input type="button" class="start_quiz" id="start_quizker" value="Начать">
+                    <button type="button" class="start_quiz" id="start_quiz_btn">Начать</button>
                 </div>
             </div>
         </div>
         <div class="quiz_container_with_questions">
-            <div class="question_name">
+            <div class="question_name" id="question_text">
                 Cопроводительный текст для вопроса
             </div>
-            <img src="img/tests_images/47899679c157cb3b7fb73e2134086efb.jpg" alt="" width="100%">
-            <div class="answers_box">
-                <div class="answer">
-                    <input id="answer0" type="radio" name="ANSWER" value="0">
-                    <label class="ans" for="answer0">ответ 1</label>
-                </div>
-                <div class="answer">
-                    <input id="answer1" type="radio" name="ANSWER" value="1">
-                    <label class="ans" for="answer1">ответ 2</label>
-                </div>
-                <div class="answer">
-                    <input id="answer2" type="radio" name="ANSWER" value="2">
-                    <label class="ans" for="answer2">ответ 3</label>
-                </div>
-                <div class="answer">
-                    <input id="answer3" type="radio" name="ANSWER" value="3">
-                    <label class="ans" for="answer3">ответ 4</label>
-                </div>
+            <img src="{% static 'img/quizs_img/questions_img/maxresdefault_6AzxeVc.jpg' %}" alt="" width="100%" id="question_image">
+            <div class="answers_box" id="answers_box">
+
+            </div>
+            <div class="next">
+                <button id="next">Ответить</button>
             </div>
         </div>
     {% endfor %}

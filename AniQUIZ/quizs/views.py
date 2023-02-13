@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.views.generic import ListView
-from django.views import generic
+from django.views import generic, View
 from django.urls import reverse_lazy
 from django.http import HttpResponse, JsonResponse
 from . import models, forms
@@ -88,31 +88,30 @@ def quizAdd_answers(request, pk):
 
         # pk_qst =
         return redirect('add_quiz_n', pk)
-
-        # answer = request.POST.get('answer')
-        # correct = request.POST.get('correct')
-        # question_pk = request.POST.get('question_pk')
-
-        # for i in request.POST.get('quantity'):
-        #    post = models.answers.objects.create(
-        #        answer=request.POST.get('answer' + str(i)),
-        #        correct=1,
-        #        question_pk=request.POST.get('question_pk' + str(i)),
-        #    )
-
-        # post = models.answers.objects.create(
-        #    answer=answer,
-        #    correct=correct,
-        #    question_pk_id=pk,
-        # )
-        #
-        # post.save()
-        # return redirect('home')
-
     data = {
         'pk_question': pk,
     }
     return render(request, 'add_answers.html', data)
+
+    # answer = request.POST.get('answer')
+    # correct = request.POST.get('correct')
+    # question_pk = request.POST.get('question_pk')
+
+    # for i in request.POST.get('quantity'):
+    #    post = models.answers.objects.create(
+    #        answer=request.POST.get('answer' + str(i)),
+    #        correct=1,
+    #        question_pk=request.POST.get('question_pk' + str(i)),
+    #    )
+
+    # post = models.answers.objects.create(
+    #    answer=answer,
+    #    correct=correct,
+    #    question_pk_id=pk,
+    # )
+    #
+    # post.save()
+    # return redirect('home')
 
 
 def addQuestion(request):
@@ -132,35 +131,45 @@ def addQuestion(request):
     return render(request, 'add_quiz.html', data)
 
 
-def is_ajax(request):
-    return request.META.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest'
+# def is_ajax(request):
+#    return request.META.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest'
 
 
 def quizView(request, pk):
-
-
-
     form = models.Quiz.objects.filter(pk=pk)
     questions = models.Questions.objects.filter(quiz=form[0].pk)
-    answers = models.Answers.objects.filter(question_pk=questions[0].id)
+    answers = models.Answers
     data = {
+        'pkQuiz': pk,
         'quiz': form,
         'questions': questions,
         'answers': answers,
     }
 
-
-
-
     return render(request, 'quiz.html', data)
+
 
 def returnThisQuestion(request, quiz, num):
 
-    if is_ajax(request=request):
-        question = models.Questions.objects.filter(quiz=quiz)
-        answers = models.Answers.objects.filter(question_pk=question[0].id)
-        data = {
-            'questions': list(question),
-            'answer': list(answers),
-        }
-        return redirect(data)
+    Question = list(models.Questions.objects.values('question', 'image', 'quiz').filter(quiz=quiz))[int(num)]
+
+    answers = list(models.Answers.objects.values('answer', 'correct', 'question_pk'))
+
+    return JsonResponse({'Question': Question, 'Answers': answers})
+
+    # question = models.Questions.objects.filter(quiz=quiz)
+    # answers = models.Answers.objects.filter(question_pk=question[0].id)
+    # data = {
+    #    'questions': list(question),
+    #    'answer': list(answers),
+    # }
+
+# class ajaxReturnDataView(View):
+#    def get(self, request):
+#        thisQuiz = request.GET.get('thisQuiz')
+#
+#        if request.is_ajax():
+#            t = 'hrn-s-gori'
+#            return JsonResponse({'eto': t}, status=200)
+#
+#        return render(request, 'quiz.html')

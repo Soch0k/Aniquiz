@@ -1,7 +1,9 @@
 
 
 
-$(document).on('click', '#start_quizker', function(e) {
+$(document).on('click', '#start_quiz_btn', function(e) {
+    ajax_get_question(i)
+    i++
     $(".card").css({display: "none"});
     $('.quiz_container_with_questions').show();
 })
@@ -31,24 +33,45 @@ $(document).on('click', '#start_quizker', function(e) {
 //    }
 //});
 
+$(document).ready(function() {
 
-$(document).on('click', '#blat_gde', function(e) {
-    console.log($('#quiz_pk').val())
+
+})
+
+
+function ajax_get_question (i) {
     $.ajax({
-        url: '/quiz/'+$('#quiz_pk').val()+'/1',
-        type: 'GET',
-        success: function(resp){
-            //resp.data.forEach(elwm => {
-            //    console.log(elwm)
-            //})
-            console.log(resp);
-            resp.forEach(elem => console.log(elem));
+        url: ''+$('#quiz_pk').val()+'/'+i,
+        method: 'GET',
+        dataType: "json",
+        //data: {
+        //    thisQuiz: $('#ThisQuiz').val(),
+        //},
+        success: function(response){
+            $('#question_text').text(response.Question.question)
+            $('#question_image').attr('src', '/'+response.Question.image);
+            //console.log(response.Answers.answer)
+            response.Answers.forEach(function(item) {
+                if (item.question_pk == i+1) {
+                    var $answers_block = $( '<div class="answer">'+
+                                                '<input id="answer0" type="radio" name="ANSWER" value="0">'+
+                                                '<label class="ans" for="answer0">'+ item.answer +'</label>'+
+                                            '</div>')
+                    $('#answers_box').append($answers_block)
+                }
+            })
         },
 
-        error: function(resp){
+        error: function(response){
             console.log('Something went wrong');
+            $('#blat_gde').text('huesos')
         },
     });
+}
+let i = 0
+$(document).on('click', '#blat_gde', function(e) {
+//    ajax_get_question(i)
+//    i++
 })
 
 
