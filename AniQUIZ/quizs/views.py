@@ -152,8 +152,8 @@ def quizView(request, pk):
 def returnThisQuestion(request, quiz, num):
 
     Question = list(models.Questions.objects.values('question', 'image', 'quiz').filter(quiz=quiz))[int(num)]
-
-    answers = list(models.Answers.objects.values('answer', 'correct', 'question_pk'))
+    takePkQuestionForAnswers = models.Questions.objects.filter(quiz=quiz)
+    answers = list(models.Answers.objects.values('answer', 'correct', 'question_pk').filter(question_pk=takePkQuestionForAnswers[int(num)].pk))
 
     return JsonResponse({'Question': Question, 'Answers': answers})
 

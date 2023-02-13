@@ -8,6 +8,10 @@ $(document).on('click', '#start_quiz_btn', function(e) {
     $('.quiz_container_with_questions').show();
 })
 
+$(document).on('click', '#next', function(e) {
+    ajax_get_question(i)
+    i++
+})
 
 //$.ajax({
 //    url: "{% url 'jquery' %}",
@@ -50,15 +54,19 @@ function ajax_get_question (i) {
         success: function(response){
             $('#question_text').text(response.Question.question)
             $('#question_image').attr('src', '/'+response.Question.image);
+            $('#answers_box').empty()
             //console.log(response.Answers.answer)
+            var n = 0
             response.Answers.forEach(function(item) {
                 if (item.question_pk == i+1) {
                     var $answers_block = $( '<div class="answer">'+
-                                                '<input id="answer0" type="radio" name="ANSWER" value="0">'+
-                                                '<label class="ans" for="answer0">'+ item.answer +'</label>'+
+                                                '<input id="answer'+n+'" type="radio" name="ANSWER" value="0">'+
+                                                '<label class="ans" for="answer'+n+'">'+ item.answer +'</label>'+
                                             '</div>')
+
                     $('#answers_box').append($answers_block)
                 }
+                n++
             })
         },
 
@@ -68,6 +76,41 @@ function ajax_get_question (i) {
         },
     });
 }
+
+//if ($('input[name="ANSWER"]').is(':checked')) {
+//    $('label[for="'+ $('input[name="ANSWER"]').id +'"]').css("background-color", "yellow")
+//}
+
+//$('.ans').click(function(){
+//    $('label[for="'+ $('input[name="ANSWER"]').id +'"]').css("background-color", "yellow")
+//
+//})
+
+//$('.ans').change(function(){
+//    if(this.checked){
+//        console.log(this.avl())
+//    }else{
+//        console.log('huesos')
+//    }
+//})
+
+//$('#answers_box').on('change', 'input[name="ANSWER"]', function() {
+//  console.log('радио изменен');
+//  console.log($(this).val());
+//
+//});
+
+//$(document).on('click', '[name="ANSWER"]', function () {
+//    if($(this).is(':checked')) {
+//        console.log('hui')
+//    }
+//})
+
+$( "#answers_box" ).click(function( event ) {
+  console.log( "clicked: " + event.target.nodeName );
+});
+
+
 let i = 0
 $(document).on('click', '#blat_gde', function(e) {
 //    ajax_get_question(i)

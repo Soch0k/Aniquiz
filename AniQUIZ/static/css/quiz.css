@@ -14,8 +14,22 @@
     background-color: #3A454B; 
     color: white;
 }
-.start .start_quiz:hover {
+.start .start_quiz:hover, .next .next_question:hover {
     color: #d4ef25;
+}
+.next {
+    margin: auto 10px;
+    text-align: center;
+}
+.next .next_question {
+    margin-bottom: 20px;
+    border: 0;
+    border-radius: 10px;
+    padding: 5px 0;
+    width: 150px;
+    font-size: 30px;
+    background-color: #3A454B;
+    color: white;
 }
 .navigation {
     width: 800px;
