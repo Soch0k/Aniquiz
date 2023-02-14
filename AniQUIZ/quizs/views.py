@@ -157,6 +157,16 @@ def returnThisQuestion(request, quiz, num):
 
     return JsonResponse({'Question': Question, 'Answers': answers})
 
+
+
+
+
+
+
+
+
+
+
     # question = models.Questions.objects.filter(quiz=quiz)
     # answers = models.Answers.objects.filter(question_pk=question[0].id)
     # data = {
@@ -169,7 +179,24 @@ def returnThisQuestion(request, quiz, num):
 #        thisQuiz = request.GET.get('thisQuiz')
 #
 #        if request.is_ajax():
-#            t = 'hrn-s-gori'
+#            t = 'n-s-gori'
 #            return JsonResponse({'eto': t}, status=200)
 #
 #        return render(request, 'quiz.html')
+
+def quizResultView(request, quizik):
+
+    data = {'her': 'hui'}
+    return render(request, 'result.html', data)
+
+
+
+
+
+
+
+
+
+
+
+
