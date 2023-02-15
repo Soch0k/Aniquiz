@@ -1,7 +1,7 @@
 from django.db import models
 from django.urls import reverse
-from ..user.models import CustomUser
-
+from django.conf import settings
+from picklefield.fields import PickledObjectField
 
 class cateory(models.Model):
     name = models.CharField(max_length=32)
@@ -43,6 +43,16 @@ class Answers(models.Model):
         return self.answer[:20]
 
 
+class Dict(models.Model):
+    key = models.CharField(max_length=24)
+    value = models.CharField(max_length=24)
+
+
 class Results(models.Model):
-    dict = models.CharField(max_length=256, null=False)
-    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    quiz_pk = models.ForeignKey(Quiz, on_delete=models.CASCADE)
+    dict = models.ForeignKey(Dict, on_delete=models.CASCADE)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.dict[:20]
+

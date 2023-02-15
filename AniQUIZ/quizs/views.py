@@ -150,14 +150,14 @@ def quizView(request, pk):
 
 
 def returnThisQuestion(request, quiz, num):
+    try:
+        Question = list(models.Questions.objects.values('question', 'image', 'quiz').filter(quiz=quiz))[int(num)]
+        takePkQuestionForAnswers = models.Questions.objects.filter(quiz=quiz)
+        answers = list(models.Answers.objects.values('answer', 'correct', 'question_pk').filter(question_pk=takePkQuestionForAnswers[int(num)].pk))
 
-    Question = list(models.Questions.objects.values('question', 'image', 'quiz').filter(quiz=quiz))[int(num)]
-    takePkQuestionForAnswers = models.Questions.objects.filter(quiz=quiz)
-    answers = list(models.Answers.objects.values('answer', 'correct', 'question_pk').filter(question_pk=takePkQuestionForAnswers[int(num)].pk))
-
-    return JsonResponse({'Question': Question, 'Answers': answers})
-
-
+        return JsonResponse({'Question': Question, 'Answers': answers})
+    except:
+        return JsonResponse({'Question': 'none', 'Answers': 'none'})
 
 
 
@@ -186,8 +186,21 @@ def returnThisQuestion(request, quiz, num):
 
 def quizResultView(request, quizik):
 
+    if request.method == 'POST':
+        if request.POST.get('answers'):
+            postDict = ''
+            postResult = ''
+
+
+
+
+
+
+
     data = {'her': 'hui'}
-    return render(request, 'result.html', data)
+    return render(request, 'result.html')
+
+
 
 
 

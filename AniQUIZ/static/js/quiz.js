@@ -5,7 +5,6 @@ var answers_list = {}
 $(document).on('click', '#start_quiz_btn', function(e) {
     ajax_get_question(question_is)
     question_is++
-    answers_list['quiz_pk'] = ($('#quiz_pk').val());
     $(".card").css({display: "none"});
     $('.quiz_container_with_questions').show();
 })
@@ -58,6 +57,16 @@ function redirectOnQuizResult () {
      xhr.open('GET', "{% url 'home' %}");
 }
 
+var a = document.cookie.split(';');
+var token = ''
+for (i = 0; i < a.length; i++) {
+    var b = a[i].split('=')
+    b[0] = b[0].replace(/\s+/g, '')
+    if (b[0] == 'csrftoken') {
+        token = b[1]
+    }
+}
+
 function ajax_get_question (i) {
     $.ajax({
         url: ''+$('#quiz_pk').val()+'/'+i,
@@ -86,8 +95,21 @@ function ajax_get_question (i) {
         },
 
         error: function(response){
-            window.location.replace("result/"+1)
-            //window.location = 'result/'+$('#quiz_pk').val()
+        console.log(answers_list)
+            $.ajax({
+                url: 'result/'+$('#quiz_pk').val(),
+                type: 'POST',
+                //dataType: "json",
+
+                data: {
+                    'quiz_pk': $('#quiz_pk').val(),
+                    'dict': JSON.stringify(answers_list),
+                    'csrfmiddlewaretoken': token
+                },
+
+            })
+            //window.location.replace("result/"+$('#quiz_pk').val())
+
         },
     });
 }
