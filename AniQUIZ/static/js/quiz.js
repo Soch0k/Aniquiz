@@ -1,6 +1,6 @@
 let question_is = 0
 
-var answers_list = {}
+let answers_list = ''
 
 $(document).on('click', '#start_quiz_btn', function(e) {
     ajax_get_question(question_is)
@@ -15,8 +15,8 @@ $(document).on('click', '#next', function(e) {
     var check_is_answer = 0;
     for(let k = 0; k < $('#answers_box div').length; k++) {
         if($("#answer"+k).is(':checked')) {
-            answers_list['question_'+question_is] = question_is;
-            answers_list['answer_'+question_is] = 'answer'+k
+            answers_list+=question_is;
+            answers_list+=k
             check_is_answer++
         }
     }
@@ -79,7 +79,6 @@ function ajax_get_question (i) {
             $('#question_text').text(response.Question.question)
             $('#question_image').attr('src', '/'+response.Question.image);
             $('#answers_box').empty()
-            //console.log(response.Answers.answer)
             var n = 0
             response.Answers.forEach(function(item) {
                 if (item.question_pk == i+1) {
@@ -95,20 +94,20 @@ function ajax_get_question (i) {
         },
 
         error: function(response){
-        console.log(answers_list)
             $.ajax({
-                url: 'result/'+$('#quiz_pk').val(),
+
                 type: 'POST',
                 //dataType: "json",
 
                 data: {
-                    'quiz_pk': $('#quiz_pk').val(),
-                    'dict': JSON.stringify(answers_list),
+                    'answers': answers_list,
                     'csrfmiddlewaretoken': token
                 },
 
+
             })
-            //window.location.replace("result/"+$('#quiz_pk').val())
+
+            window.location.replace("result/"+$('#quiz_pk').val())
 
         },
     });

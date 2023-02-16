@@ -8,5 +8,5 @@ urlpatterns = [
     path('add_quiz_answers/<int:pk>', views.quizAdd_answers, name='add_quiz_answers'),
     path('quiz/<int:pk>', views.quizView, name='quiz'),
     path('quiz/<int:quiz>/<int:num>', views.returnThisQuestion, name='jquery'),
-    path('quiz/result/<int:quizik>', views.quizResultView, name='result'),
+    path('quiz/result/<int:quiz>', views.quizResultView, name='result'),
 ]

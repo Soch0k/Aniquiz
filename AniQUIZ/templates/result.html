@@ -5,6 +5,11 @@
 
 {% block content %}
 
-    <p>vыidi otsuda</p>
+    {% for question in questions %}
+        <div class="question">
+            <p>Вопрос-</p>
+            {{question.question}}
+        </div>
+    {% endfor %}
 
 {% endblock content %}

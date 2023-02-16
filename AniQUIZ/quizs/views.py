@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.views.generic import ListView
 from django.views import generic, View
 from django.urls import reverse_lazy
-from django.http import HttpResponse, JsonResponse
+from django.http import HttpResponse, JsonResponse, HttpResponseRedirect
 from . import models, forms
 import json
 
@@ -153,19 +153,12 @@ def returnThisQuestion(request, quiz, num):
     try:
         Question = list(models.Questions.objects.values('question', 'image', 'quiz').filter(quiz=quiz))[int(num)]
         takePkQuestionForAnswers = models.Questions.objects.filter(quiz=quiz)
-        answers = list(models.Answers.objects.values('answer', 'correct', 'question_pk').filter(question_pk=takePkQuestionForAnswers[int(num)].pk))
+        answers = list(models.Answers.objects.values('answer', 'correct', 'question_pk').filter(
+            question_pk=takePkQuestionForAnswers[int(num)].pk))
 
         return JsonResponse({'Question': Question, 'Answers': answers})
     except:
-        return JsonResponse({'Question': 'none', 'Answers': 'none'})
-
-
-
-
-
-
-
-
+        return JsonResponse()
 
     # question = models.Questions.objects.filter(quiz=quiz)
     # answers = models.Answers.objects.filter(question_pk=question[0].id)
@@ -173,6 +166,7 @@ def returnThisQuestion(request, quiz, num):
     #    'questions': list(question),
     #    'answer': list(answers),
     # }
+
 
 # class ajaxReturnDataView(View):
 #    def get(self, request):
@@ -184,25 +178,33 @@ def returnThisQuestion(request, quiz, num):
 #
 #        return render(request, 'quiz.html')
 
-def quizResultView(request, quizik):
 
-    if request.method == 'POST':
-        if request.POST.get('answers'):
-            postDict = ''
-            postResult = ''
+def quizResultView(request, quiz):
 
+    if request.POST.get('answers'):
+        if (request.POST):
+            print('1')
+            post = models.Results.objects.create(
+               quiz_pk_id=quiz,
+               dict_answers=''.join(request.POST.get('answers')),
+               user_id=request.user.id,
+            )
 
+    questions = models.Questions.objects.filter(quiz_id=quiz)
+    results = models.Results.objects.filter(quiz_pk_id=quiz, user_id=request.user.id)
 
+    resultLast = list(results[len(results)-1].dict_answers)
+    result = results[len(results)-1]
 
+    answers = models.Answers.object.filter
 
+    data = {
+        'questions': questions,
+        'result': result,
+        'results_dict': resultLast,
+    }
 
-
-    data = {'her': 'hui'}
-    return render(request, 'result.html')
-
-
-
-
+    return render(request, "result.html", data)
 
 
 
