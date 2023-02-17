@@ -5,10 +5,12 @@
 
 {% block content %}
 
-    {% for question in questions %}
+    {% for result in results_dict %}
         <div class="question">
             <p>Вопрос-</p>
             {{question.question}}
+            <p>Ответ</p>
+
         </div>
     {% endfor %}
 

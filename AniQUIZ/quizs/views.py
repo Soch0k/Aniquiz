@@ -184,11 +184,12 @@ def quizResultView(request, quiz):
     if request.POST.get('answers'):
         if (request.POST):
             print('1')
-            post = models.Results.objects.create(
-               quiz_pk_id=quiz,
-               dict_answers=''.join(request.POST.get('answers')),
-               user_id=request.user.id,
-            )
+            #post = models.Results.objects.create(
+            #   quiz_pk_id=quiz,
+            #   dict_answers=''.join(request.POST.get('answers')),
+            #   user_id=request.user.id,
+            #)
+            #post.save()
 
     questions = models.Questions.objects.filter(quiz_id=quiz)
     results = models.Results.objects.filter(quiz_pk_id=quiz, user_id=request.user.id)
@@ -196,11 +197,16 @@ def quizResultView(request, quiz):
     resultLast = list(results[len(results)-1].dict_answers)
     result = results[len(results)-1]
 
-    answers = models.Answers.object.filter
+    answers = []
+
+    lengthAnswers = len(models.Results.objects.filter(quiz_pk_id=quiz)) - 1
+    for i in range(lengthAnswers-1):
+        print(i)
+        answers.append(models.Answers.objects.filter(question_pk=questions[i].id))
 
     data = {
         'questions': questions,
-        'result': result,
+        'answers': answers,
         'results_dict': resultLast,
     }
 

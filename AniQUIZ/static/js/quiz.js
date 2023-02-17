@@ -15,12 +15,11 @@ $(document).on('click', '#next', function(e) {
     var check_is_answer = 0;
     for(let k = 0; k < $('#answers_box div').length; k++) {
         if($("#answer"+k).is(':checked')) {
-            answers_list+=question_is;
             answers_list+=k
-            check_is_answer++
+            console.log(answers_list)
         }
     }
-    if (check_is_answer !== 0) {
+    if (answers_list !== 0) {
         ajax_get_question(question_is)
         question_is++
     }else {
@@ -95,7 +94,7 @@ function ajax_get_question (i) {
 
         error: function(response){
             $.ajax({
-
+                url: 'result/0',
                 type: 'POST',
                 //dataType: "json",
 
