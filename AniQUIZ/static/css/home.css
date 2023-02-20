@@ -112,3 +112,6 @@ p.discription_card {
     margin-right: 5px;
     background-image: url(../img/interactive_icons/free-icon-flash-lightning-bolt-14963.png);
 }
+p.correct {
+    color: green;
+}

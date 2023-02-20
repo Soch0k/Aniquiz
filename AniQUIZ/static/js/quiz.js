@@ -84,6 +84,7 @@ function ajax_get_question (i) {
                     var $answers_block = $( '<div class="answer">'+
                                                 '<input id="answer'+n+'" type="radio" name="ANSWER" value="0">'+
                                                 '<label class="ans" for="answer'+n+'" id="label'+n+'">'+ item.answer +'</label>'+
+                                                '<input hidden id="idAnswer'+item.answer.pk+'">'+
                                             '</div>')
 
                     $('#answers_box').append($answers_block)
@@ -94,7 +95,7 @@ function ajax_get_question (i) {
 
         error: function(response){
             $.ajax({
-                url: 'result/0',
+                url: 'result/'+$('#quiz_pk').val(),
                 type: 'POST',
                 //dataType: "json",
 

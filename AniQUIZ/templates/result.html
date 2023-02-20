@@ -5,12 +5,25 @@
 
 {% block content %}
 
-    {% for result in results_dict %}
+    {% for answers, result, questions in ansersAndResulstAndQuestions.pairs %}
         <div class="question">
-            <p>Вопрос-</p>
-            {{question.question}}
-            <p>Ответ</p>
+            <p>Вопрос:</p>
+                {{questions.question}}
+            <br><br>
+            <p>Ваш ответ:</p><br>
+            {% for answer in answers %}
+            {% cycle result as pic %}
+            {{pic}}
+                {% if answer.correct %}
+                    <p class="correct">{{ answer }}</p>
 
+                {% else %}
+                    <p>{{ answer }}</p>
+                {% endif %}
+
+            {% endfor %}
+            {{result}}
+            <p>{{ answers_list.1 }}</p>
         </div>
     {% endfor %}
 
