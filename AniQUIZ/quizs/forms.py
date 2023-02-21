@@ -38,3 +38,10 @@ class answerForm(ModelForm):
         model = models.Answers
 
         fields = ['answer', 'correct', 'question_pk']
+
+
+class ResultForm(ModelForm):
+    class Meta:
+        model = models.Results
+
+        fields = ['quiz_pk', 'dict_answers', 'user', ]

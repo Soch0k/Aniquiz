@@ -48,3 +48,5 @@ class Results(models.Model):
     dict_answers = models.CharField(max_length=128)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
 
+    objects = models.Manager()
+

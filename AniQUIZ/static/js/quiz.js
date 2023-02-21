@@ -15,8 +15,8 @@ $(document).on('click', '#next', function(e) {
     var check_is_answer = 0;
     for(let k = 0; k < $('#answers_box div').length; k++) {
         if($("#answer"+k).is(':checked')) {
-            answers_list+=k
-            console.log(answers_list)
+            answers_list+=$('#idAnswer'+k).val()
+            answers_list+=' '
         }
     }
     if (answers_list !== 0) {
@@ -84,7 +84,7 @@ function ajax_get_question (i) {
                     var $answers_block = $( '<div class="answer">'+
                                                 '<input id="answer'+n+'" type="radio" name="ANSWER" value="0">'+
                                                 '<label class="ans" for="answer'+n+'" id="label'+n+'">'+ item.answer +'</label>'+
-                                                '<input hidden id="idAnswer'+item.answer.pk+'">'+
+                                                '<input hidden id="idAnswer'+n+'" value="'+item.id+'">'+
                                             '</div>')
 
                     $('#answers_box').append($answers_block)

@@ -112,6 +112,16 @@ p.discription_card {
     margin-right: 5px;
     background-image: url(../img/interactive_icons/free-icon-flash-lightning-bolt-14963.png);
 }
-p.correct {
+
+.quiz_container_with_questions {
+    width: 80%;
+}
+.answer {
+    display: flex;
+}
+label.correct {
     color: green;
+}
+label.NoneCorrect {
+    color: red;
 }

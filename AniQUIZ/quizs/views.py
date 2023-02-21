@@ -153,7 +153,7 @@ def returnThisQuestion(request, quiz, num):
     try:
         Question = list(models.Questions.objects.values('question', 'image', 'quiz').filter(quiz=quiz))[int(num)]
         takePkQuestionForAnswers = models.Questions.objects.filter(quiz=quiz)
-        answers = list(models.Answers.objects.values('answer', 'correct', 'question_pk').filter(
+        answers = list(models.Answers.objects.values('id', 'answer', 'correct', 'question_pk').filter(
             question_pk=takePkQuestionForAnswers[int(num)].pk))
 
         return JsonResponse({'Question': Question, 'Answers': answers})
@@ -182,20 +182,26 @@ def returnThisQuestion(request, quiz, num):
 def quizResultView(request, quiz):
 
     if request.POST.get('answers'):
-        if (request.POST):
-            print('1')
-            post = models.Results.objects.create(
-               quiz_pk_id=quiz,
-               dict_answers=''.join(request.POST.get('answers')),
-               user_id=request.user.id,
-            )
-            post.save()
+        if models.Results.objects.filter(quiz_pk_id=quiz, user_id=request.user.id):
+            models.Results.objects.filter(quiz_pk_id=quiz, user_id=request.user.id).update(dict_answers=''.join(request.POST.get('answers')))
+        else:
+            if (request.POST):
+                print('1')
+                post = models.Results.objects.create(
+                   quiz_pk_id=quiz,
+                   dict_answers=''.join(request.POST.get('answers')),
+                   user_id=request.user.id,
+                )
+                post.save()
+                popular = models.Quiz.objects.get(id=quiz)
+                models.Quiz.objects.filter(id=quiz).update(popular=popular.popular+1)
 
     questions = models.Questions.objects.filter(quiz_id=quiz)
-    results = models.Results.objects.filter(quiz_pk_id=quiz, user_id=request.user.id)
+    results = models.Results.objects.get(quiz_pk_id=quiz, user_id=request.user.id).dict_answers
 
-    resultLast = list(results[len(results)-1].dict_answers)
-
+    print(results)
+    resultLast = results.split()
+    print(resultLast)
     answers = []
 
     #lengthAnswers = len(models.Results.objects.filter(quiz_pk_id=quiz)) - 1
@@ -212,6 +218,8 @@ def quizResultView(request, quiz):
 
     return render(request, "result.html", data)
 
+def AllResultsView(request, user):
+    result = models.Results.objects.filter(user_id=user)
 
 
 
