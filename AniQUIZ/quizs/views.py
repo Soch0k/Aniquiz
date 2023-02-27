@@ -3,13 +3,16 @@ from django.views.generic import ListView
 from django.views import generic, View
 from django.urls import reverse_lazy
 from django.http import HttpResponse, JsonResponse, HttpResponseRedirect
-from . import models, forms
+from . import forms, models
+from . import models as Models
 import json
 
 
 class AniquizListView(ListView):
     model = models.Quiz
     template_name = "home.html"
+
+
 
 
 def quizCreateView(request):
@@ -28,6 +31,7 @@ def quizCreateView(request):
     data = {
         'errors': errors,
         'category': category,
+        'nav': 'addquiz',
     }
     return render(request, 'add_quiz.html', data)
 
@@ -48,6 +52,7 @@ def quizAdd_questions(request, pk):
         'form': form,
         'errors': errors,
         'quiz_pk': pk,
+        'nav': 'addquiz',
     }
     return render(request, 'add_quiz.html', data)
 
@@ -90,6 +95,7 @@ def quizAdd_answers(request, pk):
         return redirect('add_quiz_n', pk)
     data = {
         'pk_question': pk,
+        'nav': 'addquiz',
     }
     return render(request, 'add_answers.html', data)
 
@@ -127,6 +133,7 @@ def addQuestion(request):
     data = {
         'errors': errors,
         'form': form,
+        'nav': 'addquiz',
     }
     return render(request, 'add_quiz.html', data)
 
@@ -144,6 +151,7 @@ def quizView(request, pk):
         'quiz': form,
         'questions': questions,
         'answers': answers,
+        'nav': 'quiz',
     }
 
     return render(request, 'quiz.html', data)
@@ -199,9 +207,7 @@ def quizResultView(request, quiz):
     questions = models.Questions.objects.filter(quiz_id=quiz)
     results = models.Results.objects.get(quiz_pk_id=quiz, user_id=request.user.id).dict_answers
 
-    print(results)
     resultLast = results.split()
-    print(resultLast)
     answers = []
 
     #lengthAnswers = len(models.Results.objects.filter(quiz_pk_id=quiz)) - 1
@@ -214,12 +220,23 @@ def quizResultView(request, quiz):
         'questions': questions,
         'answers': answers,
         'results_dict': resultLast,
+        'nav': 'res',
     }
 
     return render(request, "result.html", data)
 
-def AllResultsView(request, user):
-    result = models.Results.objects.filter(user_id=user)
+def AllResultsView(request):
+    result = models.Results.objects.filter(user_id=request.user.id)
+    quizs = []
+    for i in range(len(result)):
+        quizs.append(models.Quiz.objects.filter(id=result[i].quiz_pk_id))
+
+    data = {
+        'quizs': quizs,
+        'nav': 'res',
+    }
+
+    return render(request, 'all_results.html', data)
 
 
 

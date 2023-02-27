@@ -10,6 +10,8 @@
     <link rel="stylesheet" href="{% static 'css/home.css' %}">
     <link rel="stylesheet" href="{% static 'css/quiz.css' %}">
     <link rel="stylesheet" href="{% static 'css/add_quiz.css' %}">
+    {% block css %}
+    {% endblock css %}
 </head>
 <body>
     <header>
@@ -18,17 +20,26 @@
 
             <div class="menu_items">
                 <ul>
-                    <li><a href="{% url 'home' %}" class="active">Главная</a></li>
-                    <li><a href="#">Викторины</a></li>
-                    <li><a href="#">Результаты</a></li>
-                    <li><a href="{% url 'add_quiz'  %}">Предложить викторину</a></li>
-                    <li><a href="#">FAQs</a></li>
+                    <li><a href="{% url 'home' %}" class="{% if nav %}{% else %}active{% endif %}">Главная</a></li>
+                    <li><a href="#" class="{% if nav == 'quiz' %} active {% endif %}">Викторины</a></li>
+                    <li><a href="{% url 'allResults' %}" class="{% if nav == 'res' %} active {% endif %}">Результаты</a></li>
+                    {% if user.is_staff %}
+                    <li><a href="" class="{% if nav == 'addquiz' %} active {% endif %}">Проверка викторин</a></li>
+                    {% else %}
+                    <li><a href="{% url 'add_quiz'  %}" class="{% if nav == 'addquiz' %} active {% endif %}">Предложить викторину</a></li>
+                    {% endif %}
+                    <li><a href="#" class="{% if nav == 'faq' %} active {% endif %}">FAQs</a></li>
                 </ul>
             </div>
-
+            {% if user.is_authenticated %}
             <div class="right_menu">
-                <a href="#" class="login"><img src="{% static 'img/interactive_icons/icons-user-24.png' %}" alt="иконка пользователя" width="24" height="24"><span>ВХОД</span></a>
+                <a href="{% url 'logout' %}" class="login"><img src="{% static 'img/interactive_icons/icons-user-24.png' %}" alt="иконка пользователя" width="24" height="24"><span>Выход</span></a>
             </div>
+            {% else %}
+            <div class="right_menu">
+                <a href="{% url 'authentication' %}" class="login"><img src="{% static 'img/interactive_icons/icons-user-24.png' %}" alt="иконка пользователя" width="24" height="24"><span>ВХОД</span></a>
+            </div>
+            {% endif %}
         </div>
     </header>
 
@@ -85,6 +96,7 @@
 
     <script type="text/javascript" src="{% static 'js/jquery.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/quiz.js' %}"></script>
-
+    {% block script %}
+    {% endblock script %}
 </body>
 </html>

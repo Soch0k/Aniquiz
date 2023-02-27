@@ -9,4 +9,5 @@ urlpatterns = [
     path('quiz/<int:pk>', views.quizView, name='quiz'),
     path('quiz/<int:quiz>/<int:num>', views.returnThisQuestion, name='jquery'),
     path('quiz/result/<int:quiz>', views.quizResultView, name='result'),
+    path('user/All-results', views.AllResultsView, name='allResults')
 ]

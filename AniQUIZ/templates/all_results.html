@@ -5,9 +5,35 @@
 
 {% block content %}
 <div class="btn_back_home">
-    <a href="{% url 'home' %}"></a>
+    <a href="{% url 'home' %}">Главная</a>
 </div>
 
+<div class="quizs_block_all">
+    {% for quiz in quizs %}
+    {{quiz.pk}}
+    <div class="quiz_block_someone cards">
+        <div class="card">
+            <a href=""><img src="{% static 'img/quizs_img/imageScreensavers/47899679c157cb3b7fb73e2134086efb.jpg' %}" alt="" width="382"></a>
+            <div class="block_card_info">
+                <a href="#" class="author">
+                    <span class="avatar"></span>
+                    <p>Mugivara</p>
+                </a>
+            </div>
+            <h3>
+                <a href="#">Мой список самых привлекательных девушек [Mugivara]</a>
+            </h3>
+            <p class="discription_card">Подписавшись на эстафету, теперь я показываю вам своих талантливых девушек из моего личного списка. Величайшие трудяжницы в сферах деятельности, которые очаровали меня своим манящим типажом!</p>
+            <div class="info_about_card">
+                <div class="card_rating">
+                    <span></span>
+                    <div>9.0</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
 
 
 {% endblock content %}

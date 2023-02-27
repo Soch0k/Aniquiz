@@ -3,6 +3,9 @@
 {% block title %}AniQUIZ-Home{% endblock title %}
 {% block content %}
 {% load static %}
+
+
+
     <div class="popular_tests">
         <div class="popular_header">
             <div class="first_block">
@@ -15,7 +18,7 @@
         </div>
         <div class="popular_container">
             <div class="cards">
-                {% for i in object_list|slice:":6" %}
+                {% for i in quiz|slice:":6" %}
                     <div class="card">
                     <a href="{% url 'quiz' i.pk %}"><img src="{{i.imageScreensaver.url}}" alt="" width="382"></a>
                     <div class="block_card_info">

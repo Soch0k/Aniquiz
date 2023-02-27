@@ -1,0 +1,56 @@
+.btn_back_home {
+    width: 500px;
+    margin: 0 auto;
+    margin-bottom: 40px;
+    margin-top: -20px;
+}
+.containerLogAndReg {
+    color: white;
+    padding: 40px;
+    border: 2px solid #d4ef25;
+    width: 500px;
+    margin: 0 auto;
+    border-radius: 20px;
+}
+.containerLogAndReg .fields {
+    display: flex;
+}
+.containerLogAndReg .fields form input {
+    width: 95.5%;
+    margin-bottom: 30px;
+}
+.containerLogAndReg .fields form label {
+    font-size: 40px;
+}
+.containerLogAndReg .login {
+    display: none;
+}
+.containerLogAndReg .btns a {
+    cursor: pointer;
+}
+.btnSubmit button {
+    width: 250px;
+    height: 45px;
+    background-color: #263238;
+    border: 0px;
+    border-radius: 30px;
+    color: white;
+    font-size: 20px;
+}
+.btnSubmit {
+    display: flex;
+    justify-content: center;
+}
+.containerLogAndReg .btns {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    
+}
+.containerLogAndReg .btns a {
+    padding: 10px 30px;
+    border-radius: 40px;
+}
+.containerLogAndReg .btns a:hover {
+    background-color: #26323869;
+}
