@@ -9,29 +9,30 @@
 </div>
 
 <div class="quizs_block_all">
-    {% for quiz in quizs %}
-    {{quiz.pk}}
+    {% for quiz, rating in ModelAndRating.pairs %}
+    {% for i in quiz %}
     <div class="quiz_block_someone cards">
         <div class="card">
-            <a href=""><img src="{% static 'img/quizs_img/imageScreensavers/47899679c157cb3b7fb73e2134086efb.jpg' %}" alt="" width="382"></a>
+            <a href="{% url 'result' i.pk %}"><img src="/{{i.imageScreensaver}} " alt="" width="382"></a>
             <div class="block_card_info">
                 <a href="#" class="author">
-                    <span class="avatar"></span>
-                    <p>Mugivara</p>
+                    <span class="avatar" style="background: url(/{{i.user.icon}}) round;"></span>
+                    <p>{{i.user}}</p>
                 </a>
             </div>
             <h3>
-                <a href="#">Мой список самых привлекательных девушек [Mugivara]</a>
+                <a href="{% url 'result' i.pk %}">{{i.title}}</a>
             </h3>
-            <p class="discription_card">Подписавшись на эстафету, теперь я показываю вам своих талантливых девушек из моего личного списка. Величайшие трудяжницы в сферах деятельности, которые очаровали меня своим манящим типажом!</p>
+            <p class="discription_card">{{i.description}}</p>
             <div class="info_about_card">
                 <div class="card_rating">
                     <span></span>
-                    <div>9.0</div>
+                    <div>{{rating}}</div>
                 </div>
             </div>
         </div>
     </div>
+    {% endfor %}
     {% endfor %}
 </div>
 

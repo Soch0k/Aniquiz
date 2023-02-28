@@ -42,7 +42,20 @@ function add_answer () {
 //}
 
 $(document).on('click', '#btn_add_answer', function(e) {
-    add_answer();
+    var length = $('#answer_add_box').children.length
+    if (length != 6) {
+        var $ans = $('<div class="ans">'+
+                    '<label for="answer'+length+'">Напишите ответ '+length+'</label>'+
+                    '<label for="correct_answer_'+length+'" class="is_correct">ответ правильный?</label>'+
+                    '<input id="correct_answer_'+length+'" type="radio" name="correct" value="answer'+length+'">'+
+                    '<input id="answer'+length+'" type="text" name="answer'+length+'">'+
+                '</div>')
+    }
+    $('#answer_add_box').append($ans)
+
+    if ($('#answer_add_box').children.length == 6) {
+        $('#btn_add_answer').css('display', 'none')
+    }
 })
 
 
@@ -145,3 +158,16 @@ document.forms.answerForm.onsubmit = function() {
 //
 //})
 
+$('#SwitchImageScreensaver').change(function() {
+    if (this.files[0]) {
+        var fr = new FileReader();
+        console.log(fr)
+        console.log(fr.result)
+        fr.addEventListener("load", function () {
+          $('#SelectedImageScreensaver').attr("src", fr.result);
+        }, false);
+
+        fr.readAsDataURL(this.files[0]);
+    }
+    $('.image h2').css('color', 'red')
+})

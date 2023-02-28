@@ -10,7 +10,7 @@ body {
     padding: 0 30px;
     margin-top: 30px;
 }
-.popular_tests p {
+.popular_tests p, .discription_card {
     color: #dfdfdf;
     margin-bottom: 30px;
     margin-top: 10px;
@@ -64,13 +64,13 @@ body {
     padding: 3px 15px 3px 40px;
 }
 .author .avatar {
-    width: 20px;
-    height: 20px;
+    width: 30px;
+    height: 30px;
     border-radius: 50%;
     background: url(../img/user_icons/lufi.jpeg) round;
     position: absolute;
-    margin-top: 4px;
-    margin-left: -27px;
+    margin-top: 0px;
+    margin-left: -35px;
 }
 .author p {
     margin: 0;
@@ -113,6 +113,9 @@ p.discription_card {
     background-image: url(../img/interactive_icons/free-icon-flash-lightning-bolt-14963.png);
 }
 
+
+
+
 .quiz_container_with_questions {
     width: 80%;
 }
@@ -124,4 +127,71 @@ label.correct {
 }
 label.NoneCorrect {
     color: red;
+}
+form.mark {
+    width: 500px;
+    margin: 0 auto 40px auto;
+}
+form.mark label {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+}
+
+
+.rating-area {
+	overflow: hidden;
+	width: 210px;
+	margin: 0 auto;
+}
+.rating-area:not(:checked) > input {
+	display: none;
+}
+.rating-area:not(:checked) > label {
+	float: right;
+	width: 42px;
+	padding: 0;
+	cursor: pointer;
+	font-size: 32px;
+	line-height: 32px;
+	color: lightgrey;
+	text-shadow: 1px 1px #bbb;
+}
+.rating-area:not(:checked) > label:before {
+	content: '★';
+}
+.rating-area > input:checked ~ label {
+	color: gold;
+	text-shadow: 1px 1px #c60;
+}
+.rating-area:not(:checked) > label:hover,
+.rating-area:not(:checked) > label:hover ~ label {
+	color: gold;
+}
+.rating-area > input:checked + label:hover,
+.rating-area > input:checked + label:hover ~ label,
+.rating-area > input:checked ~ label:hover,
+.rating-area > input:checked ~ label:hover ~ label,
+.rating-area > label:hover ~ input:checked ~ label {
+	color: gold;
+	text-shadow: 1px 1px goldenrod;
+}
+.rate-area > label:active {
+	position: relative;
+}
+.bntRating {
+    color: #d4ef25;
+    height: 20px;
+    width: 80px;
+    background-color: #263238;
+    border: 0px;
+    border-radius: 20px;
+    cursor: pointer;
+}
+.bntRating:hover {
+    background-color: #263238af;
+}
+.bntRatingContainer {
+    width: 80px;
+    margin: 15px auto 0 auto;
 }

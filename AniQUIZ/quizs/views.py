@@ -8,16 +8,43 @@ from . import models as Models
 import json
 
 
-class AniquizListView(ListView):
-    model = models.Quiz
-    template_name = "home.html"
+# class AniquizListView(ListView):
+#     model = models.Quiz
+#     template_name = "home.html"
+#
+#     extra_context = {'mark': 'Главная страница'}
 
+def AniquizListView(request):
+    model = models.Quiz.objects.all()
+    rating = []
+    for Rating in model:
+        marks = Rating.rating.split()
+        try:
+            rating.append(round(int(marks[0]) / int(marks[1]), 2))
+        except:
+            rating.append(0)
 
+    ModelAndRating = dict(pairs=zip(model, rating))
 
+    data = {
+        "ModelAndRating": ModelAndRating,
+    }
+
+    return render(request, "home.html", data)
 
 def quizCreateView(request):
     errors = ''
-    category = models.cateory
+    category = models.cateory.objects.all()
+    print(category)
+    print(category)
+    print(category)
+    print(category)
+    print(category)
+    print(category)
+    print(category)
+    print(category)
+    print(category)
+    print(category)
     if request.method == 'POST':
         form = forms.QuizForm(request.POST, request.FILES)
 
@@ -194,7 +221,6 @@ def quizResultView(request, quiz):
             models.Results.objects.filter(quiz_pk_id=quiz, user_id=request.user.id).update(dict_answers=''.join(request.POST.get('answers')))
         else:
             if (request.POST):
-                print('1')
                 post = models.Results.objects.create(
                    quiz_pk_id=quiz,
                    dict_answers=''.join(request.POST.get('answers')),
@@ -203,6 +229,25 @@ def quizResultView(request, quiz):
                 post.save()
                 popular = models.Quiz.objects.get(id=quiz)
                 models.Quiz.objects.filter(id=quiz).update(popular=popular.popular+1)
+
+    if request.POST.get('ThisRating'):
+        rating = models.Quiz.objects.get(id=quiz).rating
+        ratingList = rating.split()
+        ratingStatus = models.RatingStatus.objects.filter(quiz_id=quiz, user=request.user.id)
+
+        if ratingStatus:
+            ratingList[0] = int(ratingList[0]) - int(ratingStatus[0].mark) + int(request.POST.get('rating'))
+            ratingStatus.update(mark=int(request.POST.get('rating')))
+            models.Quiz.objects.filter(id=quiz).update(rating=' '.join(str(x) for x in ratingList))
+        else:
+            ratingList[0] = int(ratingList[0]) + int(request.POST.get('rating'))
+            ratingList[1] = int(ratingList[1]) + 1
+            models.Quiz.objects.filter(id=quiz).update(rating=' '.join(str(x) for x in ratingList))
+            models.RatingStatus.objects.create(
+                user_id=request.user.id,
+                quiz_id=quiz,
+                mark=int(request.POST.get('rating'))
+            )
 
     questions = models.Questions.objects.filter(quiz_id=quiz)
     results = models.Results.objects.get(quiz_pk_id=quiz, user_id=request.user.id).dict_answers
@@ -215,11 +260,12 @@ def quizResultView(request, quiz):
         answers.append(models.Answers.objects.filter(question_pk_id=questions[i].id))
 
     ansersAndResulstAndQuestions = dict(pairs=zip(answers, resultLast, questions))
+
+    ratingStatus = models.RatingStatus.objects.filter(quiz_id=quiz, user=request.user.id)
+
     data = {
         'ansersAndResulstAndQuestions': ansersAndResulstAndQuestions,
-        'questions': questions,
-        'answers': answers,
-        'results_dict': resultLast,
+        'ratingStatus': ratingStatus,
         'nav': 'res',
     }
 
@@ -231,8 +277,19 @@ def AllResultsView(request):
     for i in range(len(result)):
         quizs.append(models.Quiz.objects.filter(id=result[i].quiz_pk_id))
 
+    rating = []
+    for Rating in quizs:
+        for Ra in Rating:
+            marks = Ra.rating.split()
+            try:
+                rating.append(round(int(marks[0]) / int(marks[1]), 2))
+            except:
+                rating.append(0)
+
+    ModelAndRating = dict(pairs=zip(quizs, rating))
+
     data = {
-        'quizs': quizs,
+        'ModelAndRating': ModelAndRating,
         'nav': 'res',
     }
 
