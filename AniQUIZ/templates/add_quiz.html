@@ -14,7 +14,11 @@
                             <h3>Вопрос:</h3>
                             <p>{{ question.question }}</p>
                             <h3>Картинка:</h3>
-                            <img src="{{ question.image }}">
+                            <img src="/{{ question.image }}">
+                        </div>
+
+                        <div class="answers">
+
                         </div>
                     {% endfor %}
                 </div>
@@ -27,7 +31,7 @@
                         {{req}}
                         <div class="image">
                             <label for="question_image1">Выберите картинку для вопроса</label>
-                            <img src="{% static 'img/quizs_img/imageScreensavers/47899679c157cb3b7fb73e2134086efb.jpg' %}" alt="">
+                            <img src="" alt="">
                             {{ form.image }}
                             <!--<input type="file" id="question_image1" name="image">-->
                         </div>
@@ -48,6 +52,9 @@
                         {% endfor %}
 
                     </form>
+                    {% for question in questions %}
+                        {{question}}
+                    {% endfor %}
                     <button id="btn_add_question" class="button">Добавить вопрос</button>
                 <div class="button_save">
                     <button id="btn_save" class="btn_save">Сохранить</button>
@@ -78,12 +85,16 @@
                 <h2>Введите название</h2>
                 <input type="text" name="title">
             </div>
+            <div class="description bl">
+                <h2>Введите описание</h2>
+                <input type="" name="description">
+            </div>
             <div class="button_add">
                 <button type="submit" class="btn_add">Создать</button>
                 <!--<a href="{% url 'add_quiz' %}" class="btn_add">Создать</a>-->
             </div>
         </form>
-
+        {{errors}}
         {% endif %}
 
 
@@ -109,6 +120,7 @@
 
 
 {% endblock content %}
+
 {% block script %}
     <script type="text/javascript" src="{% static 'js/jquery.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/add_quiz.js' %}"></script>

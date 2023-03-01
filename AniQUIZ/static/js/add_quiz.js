@@ -43,6 +43,10 @@ function add_answer () {
 
 $(document).on('click', '#btn_add_answer', function(e) {
     var length = $('#answer_add_box').children.length
+    console.log(length)
+    console.log(length)
+    console.log(length)
+    console.log(length)
     if (length != 6) {
         var $ans = $('<div class="ans">'+
                     '<label for="answer'+length+'">Напишите ответ '+length+'</label>'+
@@ -89,33 +93,33 @@ $(document).on('click', '#btn_add_answer', function(e) {
 //    }
 //}
 
-var serverResponse = document.querySelector('#response')
-
-document.forms.answerForm.onsubmit = function() {
-    e.preventDefault();
-    var answers_add_box = document.getElementById('answer_add_box');
-
-    var question = $('#pk_question').val();
-
-    var xhr = new XMLHttpRequest();
-
-    xhr.open('POST', "{% url 'add_quiz_answers' %}");
-
-    var formData = new FormData(document.forms.answerForm);
-
-    xhr.setRequestHeader('Content-Type', 'application/x-www-urlencoded')
-
-    xhr.onreadystatechange = function() {
-        if(xhr.readyState === 4 && xhr.status === 200) {
-            serverResponse.textContent = xhr.responseText
-        }
-    }
-
-
-
-    xhr.send(formData_answer);
-
-};
+//          var serverResponse = document.querySelector('#response')
+//
+//          document.forms.answerForm.onsubmit = function() {
+//              e.preventDefault();
+//              var answers_add_box = document.getElementById('answer_add_box');
+//
+//              var question = $('#pk_question').val();
+//
+//              var xhr = new XMLHttpRequest();
+//
+//              xhr.open('POST', "{% url 'add_quiz_answers' %}");
+//
+//              var formData = new FormData(document.forms.answerForm);
+//
+//              xhr.setRequestHeader('Content-Type', 'application/x-www-urlencoded')
+//
+//              xhr.onreadystatechange = function() {
+//                  if(xhr.readyState === 4 && xhr.status === 200) {
+//                      serverResponse.textContent = xhr.responseText
+//                  }
+//              }
+//
+//
+//
+//              xhr.send(formData_answer);
+//
+//          };
 
 //$(document).on('click', '#btn_save', function(e) {
 //    const answers_add_box = document.getElementById('answer_add_box');

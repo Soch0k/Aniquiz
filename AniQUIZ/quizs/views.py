@@ -35,23 +35,20 @@ def AniquizListView(request):
 def quizCreateView(request):
     errors = ''
     category = models.cateory.objects.all()
-    print(category)
-    print(category)
-    print(category)
-    print(category)
-    print(category)
-    print(category)
-    print(category)
-    print(category)
-    print(category)
-    print(category)
     if request.method == 'POST':
         form = forms.QuizForm(request.POST, request.FILES)
 
         if form.is_valid():
-            post = form.save(commit=False)
-            post.save()
-            return redirect('add_quiz_n', pk=post.pk)
+            model = models.Quiz(
+                title=request.POST.get('title'),
+                description=request.POST.get('description'),
+                imageScreensaver=request.FILES.get('imageScreensaver'),
+                category_id=request.POST.get('category'),
+                user_id=request.user.id,
+            )
+
+            model.save()
+            return redirect('add_quiz_n', pk=model.pk)
         else:
             errors = form.errors
 
@@ -101,7 +98,6 @@ def quizAdd_answers(request, pk):
         req = request.POST
 
         for key in request.POST:
-            print(req[key])
             if key[:-1] == 'answer':
                 if key == req['correct']:
                     post = models.Answers.objects.create(
@@ -119,7 +115,7 @@ def quizAdd_answers(request, pk):
                     post.save()
 
         # pk_qst =
-        return redirect('add_quiz_n', pk)
+        return redirect('add_quiz_n', models.Questions.objects.filter(id=pk)[0].quiz_id)
     data = {
         'pk_question': pk,
         'nav': 'addquiz',

@@ -8,6 +8,9 @@
     width: 600px;
     margin: 0 auto 80px auto;
 }
+.description input {
+    height: 100px;
+}
 .image img{
     border: 1px solid #d4ef25;
 }

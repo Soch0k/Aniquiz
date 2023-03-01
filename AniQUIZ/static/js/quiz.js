@@ -154,7 +154,23 @@ $( "#answers_box" ).click(function( event ) {
 
 
 
+$(document).on('click', '#btn_add_answer', function(e) {
+    var length = $('#answer_add_box').children.length
+    console.log(length)
+    if (length != 6) {
+        var $ans = $('<div class="ans">'+
+                    '<label for="answer'+length+'">Напишите ответ '+length+'</label>'+
+                    '<label for="correct_answer_'+length+'" class="is_correct">ответ правильный?</label>'+
+                    '<input id="correct_answer_'+length+'" type="radio" name="correct" value="answer'+length+'">'+
+                    '<input id="answer'+length+'" type="text" name="answer'+length+'">'+
+                '</div>')
+    }
+    $('#answer_add_box').append($ans)
 
+    if ($('#answer_add_box').children.length == 6) {
+        $('#btn_add_answer').css('display', 'none')
+    }
+})
 
 
 
