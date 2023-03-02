@@ -8,18 +8,32 @@
     <div class="quiz_add_container">
         {% if form %}
             <div id="form_question">
-                <div class="questions bl">
-                    {% for question in questions %}
+                <div class="questions_added bl">
+                    {% for question, answers in quiestionsAndAnswers.pairs %}
+
+                    <div class="question_block">
+                        <div class="btn_redact_container">
+                            <a class="btn_redact" href="">Изменить</a>
+                        </div>
                         <div class="question">
-                            <h3>Вопрос:</h3>
-                            <p>{{ question.question }}</p>
-                            <h3>Картинка:</h3>
-                            <img src="/{{ question.image }}">
+                            <h5>Вопрос:</h5>
+                            <p class="added_question">{{ question.question }}</p>
+                            <h5>Картинка:</h5>
+                            <div class="img_block">
+                                <img src="/{{ question.image }}" width="200">
+                            </div>
                         </div>
-
+                        <h5>ответы:</h5>
                         <div class="answers">
-
+                            {% for answer in answers %}
+                                {% if answer.correct %}
+                                    <p class="correct">{{answer}}</p>
+                                {% else %}
+                                    <p>{{answer}}</p>
+                                {% endif %}
+                            {% endfor %}
                         </div>
+                    </div>
                     {% endfor %}
                 </div>
                 <div class="questions bl">

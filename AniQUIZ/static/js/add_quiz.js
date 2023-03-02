@@ -42,22 +42,19 @@ function add_answer () {
 //}
 
 $(document).on('click', '#btn_add_answer', function(e) {
-    var length = $('#answer_add_box').children.length
-    console.log(length)
-    console.log(length)
-    console.log(length)
-    console.log(length)
+    var length = $('#answer_add_box').children().length
+    var num = length+1
     if (length != 6) {
         var $ans = $('<div class="ans">'+
-                    '<label for="answer'+length+'">Напишите ответ '+length+'</label>'+
-                    '<label for="correct_answer_'+length+'" class="is_correct">ответ правильный?</label>'+
-                    '<input id="correct_answer_'+length+'" type="radio" name="correct" value="answer'+length+'">'+
-                    '<input id="answer'+length+'" type="text" name="answer'+length+'">'+
+                    '<label for="answer'+num+'">Напишите ответ '+num+'</label>'+
+                    '<label for="correct_answer_'+num+'" class="is_correct">ответ верный</label>'+
+                    '<input id="correct_answer_'+num+'" type="radio" name="correct" value="answer'+num+'">'+
+                    '<input id="answer'+num+'" type="text" name="answer'+num+'">'+
                 '</div>')
     }
     $('#answer_add_box').append($ans)
 
-    if ($('#answer_add_box').children.length == 6) {
+    if ($('#answer_add_box').children().length == 6) {
         $('#btn_add_answer').css('display', 'none')
     }
 })

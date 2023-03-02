@@ -71,8 +71,17 @@ def quizAdd_questions(request, pk):
             return redirect('add_quiz_answers', pk=post.pk)
         else:
             errors = formQestion.errors
+
+
+    questions = models.Questions.objects.filter(quiz=pk)
+    ansswers = []
+    for i in questions:
+        ansswers.append(models.Answers.objects.filter(question_pk=i.pk))
+
+    quiestionsAndAnswers = dict(pairs=zip(questions, ansswers))
+
     data = {
-        'questions': models.Questions.objects.filter(quiz=pk),
+        'quiestionsAndAnswers': quiestionsAndAnswers,
         'form': form,
         'errors': errors,
         'quiz_pk': pk,

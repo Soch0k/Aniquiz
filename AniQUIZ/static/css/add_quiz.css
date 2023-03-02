@@ -106,7 +106,46 @@ input[type="file"] {
     display: flex;
     width: 170px;
     height: 40px;
-
     margin: 0 auto;
     margin-top: 40px;
+}
+.question_block {
+    width: 200px;
+    margin: 0 auto;
+    border: 2px solid #d4ef2511;
+    padding: 20px 20px 0 20px;
+    margin-bottom: 20px;
+}
+#form_question .questions_added {
+    display: flex;
+    flex-wrap: wrap;
+}
+.question .img_block {
+    height: 200px;
+}
+.question .img_block img {
+    max-height: 200px;
+}
+.question_block .answers {
+    margin-top: 5px;
+    margin-bottom: 10px;
+}
+.added_question {
+    margin-left: 20px;
+    font-size: 20px;
+}
+.answers .correct {
+    color: green;
+}
+.questions_added .question_block .btn_redact_container{
+    margin-bottom: 20px;
+    margin-top: -10px;
+}
+.questions_added .question_block .btn_redact_container .btn_redact {
+    color: #d4ef25a2;
+    
+}
+.questions_added .question_block .btn_redact_container .btn_redact:hover {
+    color: #ddff00;
+    cursor: pointer;
 }

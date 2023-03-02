@@ -11,14 +11,14 @@
             <div class="answer_add" id="answer_add_box">
                 <div class="ans">
                     <label for="answer1">Напишите ответ 1</label>
-                    <label for="correct_answer_1" class="is_correct">ответ правильный?</label>
+                    <label for="correct_answer_1" class="is_correct">ответ верный</label>
                     <input type="radio" id="correct_answer_1" name='correct' value="answer1">
                     <input id="answer1" type="text" name="answer1">
                 </div>
 
                 <div class="ans">
                     <label for="answer2">Напишите ответ 2</label>
-                    <label for="correct_answer_2" class="is_correct">ответ правильный?</label>
+                    <label for="correct_answer_2" class="is_correct">ответ верный</label>
                     <input id="correct_answer_2" type="radio" name='correct' value="answer2">
                     <input id="answer2" type="text" name="answer2">
                 </div>
@@ -31,7 +31,6 @@
 
 {% endblock content %}
 
-{% block skript %}
-    <script type="text/javascript" src="{% static 'js/jquery.js' %}"></script>
+{% block script %}
     <script type="text/javascript" src="{% static 'js/add_quiz.js' %}"></script>
-{% endblock %}
+{% endblock script %}
