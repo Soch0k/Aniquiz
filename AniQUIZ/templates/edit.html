@@ -1,0 +1,13 @@
+
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}QUIZ-result{% endblock title %}
+
+{% block content %}
+
+    <form METHOD="POST" enctype="multipart/form-data">
+      {% csrf_token %}
+      {{ form }}
+    </form>
+
+{% endblock content %}

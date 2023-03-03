@@ -3,8 +3,6 @@ from django.forms import ModelForm, Textarea, ChoiceField, ModelChoiceField
 
 
 class QuizForm(ModelForm):
-
-
     class Meta:
         model = models.Quiz
 
@@ -30,3 +28,10 @@ class ResultForm(ModelForm):
         model = models.Results
 
         fields = ['quiz_pk', 'dict_answers', 'user', ]
+
+
+class QuestionRedactForm(ModelForm):
+    class Meta:
+        model = models.Questions
+
+        fields = ['question', 'image', ]
