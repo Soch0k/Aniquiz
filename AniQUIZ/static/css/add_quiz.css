@@ -109,6 +109,17 @@ input[type="file"] {
     margin: 0 auto;
     margin-top: 40px;
 }
+#SelectedImageScreensaver {
+    display: flex;
+    width: 600px;
+    height: 400px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    background: url(/static/img/interactive_icons/noPhoto.png) round;
+}
+.bl input {
+    margin-top: 10px;
+}
 .question_block {
     width: 200px;
     margin: 0 auto;
