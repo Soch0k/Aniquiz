@@ -1,5 +1,6 @@
 from . import models
-from django.forms import ModelForm, Textarea, ChoiceField, ModelChoiceField
+from django.forms import ModelForm
+from django import forms
 
 
 class QuizForm(ModelForm):
@@ -34,4 +35,26 @@ class QuestionRedactForm(ModelForm):
     class Meta:
         model = models.Questions
 
+        widgets = {
+            "question": forms.TextInput(attrs={
+                'id': 'question_name',
+            }),
+            "image": forms.FileInput(attrs={
+                'id': 'question_image',
+            }),
+        }
+
         fields = ['question', 'image', ]
+
+
+class AnswerRedactForm(ModelForm):
+    class Meta:
+        model = models.Answers
+
+        widgets = {
+            "answer": forms.TextInput(attrs={
+                'id': 'Answer',
+            }),
+        }
+
+        fields = ['answer', ]

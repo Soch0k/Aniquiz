@@ -1,0 +1,20 @@
+
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}QUIZ-result{% endblock title %}
+
+{% block content %}
+{% if formQuestion %}
+    <form METHOD="POST" enctype="multipart/form-data" >
+        {% csrf_token %}
+        <label for="question_name">Измените вопрос</label>
+        {{ formQuestion.question }}
+        <label for="question_image">Измените картинку</label>
+        {{ formQuestion.image }}
+    </form>
+
+{% endif %}
+
+
+
+{% endblock content %}

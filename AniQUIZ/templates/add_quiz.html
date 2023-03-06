@@ -13,23 +13,23 @@
 
                     <div class="question_block">
                         <div class="btn_redact_container">
-                            <a class="btn_redact" href="{% url 'redact' %}">Изменить</a>
+                            <a class="btn_redact" href="{% url 'redact_question' question.pk %}">Изменить</a>
                         </div>
                         <div class="question">
                             <h5>Вопрос:</h5>
                             <p class="added_question">{{ question.question }}</p>
                             <h5>Картинка:</h5>
                             <div class="img_block">
-                                <img src="/{{ question.image }}" width="200">
+                                <img src="/{{ question.image }}" width="260">
                             </div>
                         </div>
                         <h5>ответы:</h5>
                         <div class="answers">
                             {% for answer in answers %}
                                 {% if answer.correct %}
-                                    <p class="correct">{{answer}}</p>
+                                    <p class="correct">{{answer.answer}}</p>
                                 {% else %}
-                                    <p>{{answer}}</p>
+                                    <p>{{answer.answer}}</p>
                                 {% endif %}
                             {% endfor %}
                         </div>
@@ -44,9 +44,9 @@
                         <input type="text" id="question1" name="question">
                         {{req}}
                         <div class="image">
-                            <label for="question_image1">Выберите картинку для вопроса</label>
-                            <img src="" alt="">
-                            {{ form.image }}
+                            <label for="SwitchImageQuestion">Выберите картинку для вопроса</label>
+                            <span id="SelectedImageQuestion" alt="выбранная картинка" width="600"></span>
+                            <input type="file" id="SwitchImageQuestion" name="image">
                             <!--<input type="file" id="question_image1" name="image">-->
                         </div>
                         <select name="quiz" hidden>
@@ -92,7 +92,7 @@
             </div>
             <div class="image bl">
                 <h2>Выберите картинку</h2>
-                <span id="SelectedImageScreensaver" src="{% static 'img/interactive_icons/noPhoto.png' %}" alt="выбранная картинка" width="600"></span>
+                <span id="SelectedImageScreensaver" alt="выбранная картинка" width="600"></span>
                 <input id="SwitchImageScreensaver" type="file" name="imageScreensaver">
             </div>
             <div class="name bl">

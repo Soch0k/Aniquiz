@@ -266,16 +266,18 @@ def AllResultsView(request):
 
 def questionRedactView(request, pk):
     model = models.Questions.objects.filter(pk=pk)
-    answers = models.Answers.objects.filter(question_pk_id=model.pk)
+    answers = models.Answers.objects.filter(question_pk_id=model[0].pk)
+
+    form = forms.QuestionRedactForm
+
 
     if request.method == 'POST':
         form = forms.QuestionRedactForm(request.POST, request.FILES)
 
+    data = {
+        'model': models,
+        'answers': answers,
+        'formQuestion': form,
+    }
 
-
-
-
-
-
-
-
+    return render(request, 'redact/editQuestion.html', data)

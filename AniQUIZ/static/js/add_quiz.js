@@ -165,10 +165,22 @@ $('#SwitchImageScreensaver').change(function() {
         console.log(fr)
         console.log(fr.result)
         fr.addEventListener("load", function () {
-          $('#SelectedImageScreensaver').attr("src", fr.result);
+          $('#SelectedImageScreensaver').css("background", 'url('+fr.result+') round');
         }, false);
 
         fr.readAsDataURL(this.files[0]);
     }
-    $('.image h2').css('color', 'red')
+})
+
+$('#SwitchImageQuestion').change(function() {
+    if (this.files[0]) {
+        var fr = new FileReader();
+        console.log(fr)
+        console.log(fr.result)
+        fr.addEventListener("load", function () {
+          $('#SelectedImageQuestion').css("background", 'url('+fr.result+') round');
+        }, false);
+
+        fr.readAsDataURL(this.files[0]);
+    }
 })

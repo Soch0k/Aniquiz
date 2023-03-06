@@ -10,5 +10,5 @@ urlpatterns = [
     path('quiz/<int:quiz>/<int:num>', views.returnThisQuestion, name='jquery'),
     path('quiz/result/<int:quiz>', views.quizResultView, name='result'),
     path('user/All-results', views.AllResultsView, name='allResults'),
-    path('quiz/question/redact/<int:pk>', views.questionRedactView, name='redact')
+    path('quiz/question/redact/<int:pk>', views.questionRedactView, name='redact_question')
 ]
