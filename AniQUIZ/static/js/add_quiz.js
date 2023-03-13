@@ -184,3 +184,17 @@ $('#SwitchImageQuestion').change(function() {
         fr.readAsDataURL(this.files[0]);
     }
 })
+
+
+$('#question_image').change(function() {
+    if (this.files[0]) {
+        var fr = new FileReader();
+        console.log(fr)
+        console.log(fr.result)
+        fr.addEventListener("load", function () {
+          $('#QuestionImage').css("background", 'url('+fr.result+') round');
+        }, false);
+
+        fr.readAsDataURL(this.files[0]);
+    }
+})

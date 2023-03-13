@@ -164,3 +164,41 @@ input[type="file"] {
     color: #ddff00;
     cursor: pointer;
 }
+
+
+.Form_Redact {
+    display: flex;
+    flex-wrap: wrap;
+    width: 450px;
+}
+.Form_Redact .btn_add_answers {
+    margin-top: 20px;
+}
+#QuestionImage {
+    display: flex;
+    width: 600px;
+    height: 300px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+.blockEditAnswers .Form_Redact_ans {
+    display: flex;
+    margin-bottom: 20px;
+}
+.blockEditAnswers .Form_Redact_ans label {
+    display: flex;
+    text-align: center;
+    align-items: center;
+}
+.blockEditAnswers .Form_Redact_ans button {
+    margin-left: 10px;
+    font-size: 16px;
+    background-color: #263238;
+    color: #d4ef25;
+}
+.blockEditAnswers {
+    margin-top: 30px;
+}
+.Form_Redact_ans .correct {
+    border: 1px solid #d4ef25;
+}

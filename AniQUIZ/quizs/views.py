@@ -5,21 +5,39 @@ from django.views.generic.edit import UpdateView, DeleteView, CreateView
 from django.urls import reverse_lazy
 from django.http import HttpResponse, JsonResponse, HttpResponseRedirect
 from . import forms, models
-from . import models as Models
+
 import json
 
 
 def AniquizListView(request):
     model = models.Quiz.objects.all()
-    rating = []
-    for Rating in model:
-        marks = Rating.rating.split()
-        try:
-            rating.append(round(int(marks[0]) / int(marks[1]), 2))
-        except:
-            rating.append(0)
 
-    ModelAndRating = dict(pairs=zip(model, rating))
+    RatingForSorted = {}
+
+    for rating_pk in model:
+        marks = rating_pk.rating.split()
+        try:
+            RatingForSorted[rating_pk.pk] = (round(int(marks[0]) / int(marks[1]), 2))
+        except:
+            RatingForSorted[rating_pk.pk] = (0)
+
+    sortRating = sorted(RatingForSorted.items(), key=lambda x:x[1], reverse=True)
+    converted_sortRating = dict(sortRating)
+
+    model_sorted = []
+    for key in converted_sortRating:
+        model_sorted.append(models.Quiz.objects.filter(pk=key))
+
+    rating = []
+    for i in model_sorted:
+        for Rating in i:
+            marks = Rating.rating.split()
+            try:
+                rating.append(round(int(marks[0]) / int(marks[1]), 2))
+            except:
+                rating.append(0)
+
+    ModelAndRating = dict(pairs=zip(model_sorted, rating))
 
     data = {
         "ModelAndRating": ModelAndRating,
@@ -170,8 +188,7 @@ def returnThisQuestion(request, quiz, num):
     try:
         Question = list(models.Questions.objects.values('question', 'image', 'quiz').filter(quiz=quiz))[int(num)]
         takePkQuestionForAnswers = models.Questions.objects.filter(quiz=quiz)
-        answers = list(models.Answers.objects.values('id', 'answer', 'correct', 'question_pk').filter(
-            question_pk=takePkQuestionForAnswers[int(num)].pk))
+        answers = list(models.Answers.objects.values('id', 'answer', 'correct', 'question_pk').filter(question_pk=((takePkQuestionForAnswers[num]).pk)))
 
         return JsonResponse({'Question': Question, 'Answers': answers})
     except:
@@ -265,19 +282,64 @@ def AllResultsView(request):
         return redirect('authentication')
 
 def questionRedactView(request, pk):
-    model = models.Questions.objects.filter(pk=pk)
-    answers = models.Answers.objects.filter(question_pk_id=model[0].pk)
-
+    question = models.Questions.objects.filter(pk=pk)
+    answers = models.Answers.objects.filter(question_pk_id=question[0].pk)
     form = forms.QuestionRedactForm
 
 
     if request.method == 'POST':
-        form = forms.QuestionRedactForm(request.POST, request.FILES)
+        if request.POST.get('question'):
+            models.Questions.objects.filter(pk=pk).update(question=request.POST.get('question'))
+            if request.FILES:
+                her = 'static/img/quizs_img/questions_img/' + request.FILES['image']._get_name()
+                models.Questions.objects.filter(pk=pk).update(image=her)
+        if request.POST['idAnswer']:
+            models.Answers.objects.filter(pk=request.POST['idAnswer']).update(answer=request.POST['answer'])
+
+
+
 
     data = {
-        'model': models,
+        'question': question[0],
         'answers': answers,
         'formQuestion': form,
     }
 
     return render(request, 'redact/editQuestion.html', data)
+
+#def answersRedactView(request, pkQue, pkAns):
+#    question = models.Questions.objects.filter(pk=pkQue)
+#    answers = models.Answers.objects.filter(question_pk_id=question[0].pk)
+#
+#    if request.POST:
+#
+#
+#
+#    data = {
+#        'question': question[0],
+#        'formQuestion': form,
+#    }
+#
+#    return render(request, 'redact/editQuestion.html', data)
+
+def QuizsAndRating(request):
+    quiz = models.Quiz.objects.all()
+
+    rating = []
+
+    for rating_pk in quiz:
+        marks = rating_pk.rating.split()
+        try:
+            rating.append(round(int(marks[0]) / int(marks[1]), 2))
+        except:
+            rating.append(0)
+
+    QuizsAndRating = dict(pairs=zip(quiz, rating))
+
+    data = {
+        'QuizsAndRating': QuizsAndRating,
+    }
+
+
+
+

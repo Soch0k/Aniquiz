@@ -10,21 +10,21 @@
             </div>
             <input id="quiz_pk" hidden value="{{ quiz.pk }}">
             <div class="card">
-                <a href="#"><img src="{{ quiz.imageScreensaver.url }}" alt="" width="500"></a>
+                <a href="#"><img src="/{{ quiz.imageScreensaver }}" alt="" width="500"></a>
                 <div class="block_card_info">
                     <a href="#" class="author">
-                        <span class="avatar" ></span>
-                        <p>Mugivara</p>
+                        <span class="avatar" style="background: url(/{{quiz.user.icon}}) round;"></span>
+                        <p>{{quiz.user.username}}</p>
                     </a>
                 </div>
                 <h3>
-                    Мой список самых привлекательных девушек [Mugivara]
+                    {{quiz.title}}
                 </h3>
-                <p class="discription_card">Подписавшись на эстафету, теперь я показываю вам своих талантливых девушек из моего личного списка. Величайшие трудяжницы в сферах деятельности, которые очаровали меня своим манящим типажом!</p>
+                <p class="discription_card">{{quiz.description}}</p>
                 <div class="info_about_card">
                     <div class="card_rating">
                         <span></span>
-                        <div>9.0</div>
+                        <div>{{result}}</div>
                     </div>
                 </div>
                 <div class="start">
@@ -32,28 +32,17 @@
                 </div>
             </div>
         </div>
+        <div class="test">
+            <label for="hernya">aaaaaa</label>
+            <input id="hernya" type="radio" value="1">
+        </div>
         <div class="quiz_container_with_questions">
             <div class="question_name" id="question_text">
                 Cопроводительный текст для вопроса
             </div>
             <img src="{% static 'img/quizs_img/questions_img/maxresdefault_6AzxeVc.jpg' %}" alt="" width="100%" id="question_image">
-            <div class="answers_box" id="answers_box">
-                <div class="answer">
-                    <input id="answer0" type="radio" name="ANSWER" value="0">
-                    <label class="ans" for="answer0">ответ 1</label>
-                </div>
-                <div class="answer">
-                    <input id="answer1" type="radio" name="ANSWER" value="1">
-                    <label class="ans" for="answer1">ответ 2</label>
-                </div>
-                <div class="answer">
-                    <input id="answer2" type="radio" name="ANSWER" value="2">
-                    <label class="ans" for="answer2" id="label2">ответ 3</label>
-                </div>
-                <div class="answer">
-                    <input id="answer3" type="radio" name="ANSWER" value="3">
-                    <label class="ans" for="answer3">ответ 4</label>
-                </div>
+            <div class="answers_box" id="answers_box_ans">
+
             </div>
             <div class="next">
                 <button id="next" class="next_question">Ответить</button>

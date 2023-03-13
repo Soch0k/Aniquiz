@@ -12,11 +12,15 @@ $(document).on('click', '#start_quiz_btn', function(e) {
 
 
 $(document).on('click', '#next', function(e) {
+    console.log('hui')//delete-this-strok
     var check_is_answer = 0;
-    for(let k = 0; k < $('#answers_box div').length; k++) {
+    for(let k = 0; k < $('#answers_box_ans div').length; k++) {
+        console.log(k)//delete-this-strok
         if($("#answer"+k).is(':checked')) {
+            console.log('hui')//delete-this-strok
             answers_list+=$('#idAnswer'+k).val()
             answers_list+=' '
+            console.log(answers_list)//delete-this-strok
         }
     }
     if (answers_list !== 0) {
@@ -77,18 +81,18 @@ function ajax_get_question (i) {
         success: function(response){
             $('#question_text').text(response.Question.question)
             $('#question_image').attr('src', '/'+response.Question.image);
-            $('#answers_box').empty()
+            $('#answers_box_ans').empty()
             var n = 0
             response.Answers.forEach(function(item) {
-                if (item.question_pk == i+1) {
+
                     var $answers_block = $( '<div class="answer">'+
-                                                '<input id="answer'+n+'" type="radio" name="ANSWER" value="0">'+
                                                 '<label class="ans" for="answer'+n+'" id="label'+n+'">'+ item.answer +'</label>'+
+                                                '<input id="answer'+n+'" type="radio" name="ANSWER" value="0">'+
                                                 '<input hidden id="idAnswer'+n+'" value="'+item.id+'">'+
                                             '</div>')
 
-                    $('#answers_box').append($answers_block)
-                }
+                    $('#answers_box_ans').append($answers_block);
+
                 n++
             })
         },
@@ -154,9 +158,26 @@ $( "#answers_box" ).click(function( event ) {
 
 
 
+$('.answer input[type=radio]').change(function (e) { 
+    e.preventDefault();
+    $('#next').css('background-color', 'red');
+    $('.quiz_container_with_questions').css('background-color', 'red');
+    array.forEach(element => {
+        
+    });
 
+    $('.answer .ans').addClass();
+});
 
-
+$('input[type=radio][name=ANSWER]').change(function() {
+    $('#next').css('background-color', 'red');
+    if (this.value == 'answer0') {
+        console.log('huesos')
+    }
+    else if (this.value == 'transfer') {
+        $('#next.next_question').css('background-color', 'red');
+    }
+});
 
 
 

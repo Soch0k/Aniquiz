@@ -5,16 +5,36 @@
 
 {% block content %}
 {% if formQuestion %}
-    <form METHOD="POST" enctype="multipart/form-data" >
+    <form class="Form_Redact" METHOD="POST" enctype="multipart/form-data" >
         {% csrf_token %}
         <label for="question_name">Измените вопрос</label>
-        {{ formQuestion.question }}
-        <label for="question_image">Измените картинку</label>
-        {{ formQuestion.image }}
+        <input id="question_name" name="question" value="{{question.question}}">
+<!--        {{ formQuestion.question }}-->
+        <label for="SwitchImageQuestion">Измените картинку</label>
+        <span id="QuestionImage" alt="выбранная картинка" width="600" style="background: url(/{{question.image}}) round;"></span>
+
+        <input type="file" id="SwitchImageQuestion" name="image">
+<!--        {{ formQuestion.image }}-->
+        <button type="submit" class="btn_add_answers">Сохранить</button>
     </form>
+<div class="blockEditAnswers">
+    {% for answer in answers %}
+        <form METHOD="POST" class="Form_Redact_ans">
+            {% csrf_token %}
+            <label for="a{{answer.id}}">Ответ:</label>
+            <input class="{% if answer.correct %}correct{% endif %}" type="text" name="answer" id="a{{answer.id}}" value="{{answer.answer}}">
+            <input hidden value="{{answer.id}}" name="idAnswer">
+            <button type="submit">Изменить</button>
+        </form>
+    {% endfor %}
+    <a href="{% url 'add_quiz_n' question.quiz.pk %}">Вернуться</a>
+</div>
 
 {% endif %}
-
+{% block script %}
+    <script type="text/javascript" src="{% static 'js/jquery.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/add_quiz.js' %}"></script>
+{% endblock script %}
 
 
 {% endblock content %}

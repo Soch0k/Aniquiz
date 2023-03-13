@@ -57,4 +57,4 @@ class AnswerRedactForm(ModelForm):
             }),
         }
 
-        fields = ['answer', ]
+        fields = ['answer', 'correct']
