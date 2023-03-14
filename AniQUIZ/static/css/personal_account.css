@@ -1,0 +1,4 @@
+.icon_block {
+    display: flex;
+    flex-wrap: nowrap;
+}

@@ -5,6 +5,7 @@ from django.views.generic.edit import UpdateView, DeleteView, CreateView
 from django.urls import reverse_lazy
 from django.http import HttpResponse, JsonResponse, HttpResponseRedirect
 from . import forms, models
+from ..user import forms
 
 import json
 
@@ -339,6 +340,20 @@ def QuizsAndRating(request):
     data = {
         'QuizsAndRating': QuizsAndRating,
     }
+
+
+def personalAccountView(request, pkUser):
+
+    if request.method.POST:
+        if request.POST.get['icon']:
+            models
+
+
+    return redirect('personal_account.html')
+
+
+
+
 
 
 

@@ -34,7 +34,7 @@
             </div>
             {% if user.is_authenticated %}
             <div class="right_menu">
-                <a href="{% url 'logout' %}" class="login"><img src="{% static 'img/interactive_icons/icons-user-24.png' %}" alt="иконка пользователя" width="24" height="24"><span>Выход</span></a>
+                <a href="{% url 'personal_account' %}" class="login"><img src="/{{user.icon}}" alt="иконка пользователя" width="24" height="24"><span>{{ user.username|slice:":10" }}</span></a>
             </div>
             {% else %}
             <div class="right_menu">
