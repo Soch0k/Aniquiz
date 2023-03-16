@@ -11,5 +11,5 @@ urlpatterns = [
     path('quiz/result/<int:quiz>', views.quizResultView, name='result'),
     path('user/All-results', views.AllResultsView, name='allResults'),
     path('quiz/question/redact/<int:pk>', views.questionRedactView, name='redact_question'),
-    path('quiz/personal_account/<int:pk>', views.personalAccountView, name='personal_account')
+    path('quiz/watch-all', views.quizAllView, name='quiz_all'),
 ]

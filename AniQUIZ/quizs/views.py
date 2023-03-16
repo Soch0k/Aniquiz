@@ -5,7 +5,7 @@ from django.views.generic.edit import UpdateView, DeleteView, CreateView
 from django.urls import reverse_lazy
 from django.http import HttpResponse, JsonResponse, HttpResponseRedirect
 from . import forms, models
-from ..user import forms
+
 
 import json
 
@@ -111,6 +111,9 @@ def quizAdd_questions(request, pk):
 
 
 def quizAdd_answers(request, pk):
+
+    errors = {}
+
     if request.user.pk:
         if request.method == 'POST':
             print(request.POST)
@@ -120,20 +123,37 @@ def quizAdd_answers(request, pk):
 
             for key in request.POST:
                 if key[:-1] == 'answer':
-                    if key == req['correct']:
-                        post = models.Answers.objects.create(
-                            answer=req[key],
-                            question_pk_id=pk,
-                            correct=1,
-                        )
-                        post.save()
+                    try:
+                        if key == req['correct']:
+                            post = models.Answers.objects.create(
+                                answer=req[key],
+                                question_pk_id=pk,
+                                correct=1,
+                            )
+                            post.save()
+                    except:
+                        errors = {
+                            'pk_question': pk,
+                            'nav': 'addquiz',
+                            'errors': 'в форме есть ошибки, она не заполнена или не указан верный ответ'
+                        }
+                        return render(request, 'add_answers.html', errors)
+
                     else:
-                        post = models.Answers.objects.create(
-                            answer=req[key],
-                            question_pk_id=pk,
-                            correct=0,
-                        )
-                        post.save()
+                        try:
+                            post = models.Answers.objects.create(
+                                answer=req[key],
+                                question_pk_id=pk,
+                                correct=0,
+                            )
+                            post.save()
+                        except:
+                            errors = {
+                                'pk_question': pk,
+                                'nav': 'addquiz',
+                                'errors': 'в форме есть ошибки, она не заполнена или не указан верный ответ'
+                            }
+                            return render(request, 'add_answers.html', errors)
 
             # pk_qst =
             return redirect('add_quiz_n', models.Questions.objects.filter(id=pk)[0].quiz_id)
@@ -342,15 +362,25 @@ def QuizsAndRating(request):
     }
 
 
-def personalAccountView(request, pkUser):
+def quizAllView(request):
+    model = models.Quiz.objects.all()
 
-    if request.method.POST:
-        if request.POST.get['icon']:
-            models
+    rating = {}
 
+    for rating_pk in model:
+        marks = rating_pk.rating.split()
+        try:
+            rating[rating_pk.pk] = (round(int(marks[0]) / int(marks[1]), 2))
+        except:
+            rating[rating_pk.pk] = (0)
 
-    return redirect('personal_account.html')
+    QuizAndRating = dict(pairs=zip(model, rating))
 
+    data = {
+        'QuizAndRating': QuizAndRating
+    }
+
+    return render(request, 'all_quiz.html', data)
 
 
 

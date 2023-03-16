@@ -1,4 +1,56 @@
-.icon_block {
+.block_settings {
     display: flex;
     flex-wrap: nowrap;
+}
+.now_icon {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+}
+.now_icon label {
+    font-size: 26px;
+    color: white;
+}
+.now_icon img {
+    margin: 0 auto;
+    border: 1px solid #d4ef25;
+
+    margin-top: 20px;
+}
+.block_settings {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+
+    width: 350px;
+}
+.block_settings form {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+}
+.block_settings form label {
+    font-size: 26px;
+    color: white;
+
+    margin-top: 30px;
+}
+.block_settings form input {
+    width: 350px;
+}
+.block_settings form button {
+    color: #d4ef25;
+    width: 100px;
+    font-size: 22px;
+    margin: 20px auto 0 auto;
+
+    background-color: #263238;
+}
+.block_settings .quiet {
+    margin: 20px auto 0 auto;
+    padding: 5px 10px;
+    font-size: 26px;
+
+    background-color: #263238;
+    color: #d4ef25;
 }

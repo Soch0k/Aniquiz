@@ -1,9 +1,10 @@
 from django.urls import reverse_lazy
 from django.views import generic
-from . import forms
+from . import forms, models
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views import generic
+from django.views.generic import CreateView, UpdateView
 from django.contrib import auth
 
 
@@ -23,6 +24,8 @@ class SignUp(generic.CreateView):
 
 
 def RegAndLog (request):
+    error = {}
+
     if request.method == "POST":
         if request.POST.get('Log'):
              user = auth.authenticate(username=request.POST['username'], password=request.POST['password'])
@@ -35,4 +38,42 @@ def RegAndLog (request):
                 user = form.save()
                 auth.login(request, user)
                 return redirect('home')
+
+
+
     return render(request, 'LogAndReg.html')
+
+
+# def personalAccountView(request, pk):
+#
+#     if request.method == "POST":
+#         if request.FILES['icon']:
+#             form = forms.UserChangeIconForm(request.FILES, instance=request.user)
+#
+#             if form.is_valid():
+#                 icon = request.FILES
+#                 print(icon)
+#                 print(form)
+#                 models.CustomUser.objects.filter(pk=pk).update(icon=request.FILES['icon'])
+#
+#
+#             # model = models.CustomUser.objects.get(pk=pk)
+#             # model.icon = request.FILES
+#             # model.save()
+#         #print('huilaebuchii')
+#         #models.CustomUser.objects.filter(pk=pk).update(icon=request.FILES)
+#         #model.save()
+#
+#
+#     data = {
+#         'userIn': models.CustomUser.objects.filter(pk=pk)
+#     }
+#
+#     return render(request, 'personal_account.html', data)
+
+
+class personalAccountView(UpdateView):
+    model = models.CustomUser
+    fields = ['username', 'icon']
+    template_name = 'personal_account.html'
+    success_url = reverse_lazy('home')

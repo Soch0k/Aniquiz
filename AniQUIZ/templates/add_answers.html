@@ -26,6 +26,9 @@
             <button id="btn_save" type="submit">сохранить</button>
 
         </form>
+        {% if errors %}
+            <p>{{errors}}</p>
+        {% endif %}
         <button id="btn_add_answer" class="button btn_add_answer">Добавить ответ</button>
     </div>
 

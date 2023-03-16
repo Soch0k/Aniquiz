@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}View-quizs{% endblock title %}
+
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/all_quiz.css' %}">
+{% endblock css %}
+
+{% block content %}
+    <div class="block-cards">
+        {% for quiz, result in QuizAndRating.pairs %}
+            <div class="card">
+                <a href="{% url 'quiz' quiz.pk %}"><img src="/{{quiz.imageScreensaver}}" alt="" width="382"></a>
+                <div class="block_card_info">
+                    <a href="#" class="author">
+                        <span class="avatar" style="background: url(/{{quiz.user.icon}}) round;"></span>
+                        <p>{{quiz.user}}</p>
+                    </a>
+                </div>
+                <h3>
+                    <a href="{% url 'quiz' quiz.pk %}">{{quiz.title}}</a>
+                </h3>
+                <p class="discription_card">{{quiz.description}}</p>
+                <div class="info_about_card">
+                    <div class="card_rating">
+                        <span></span>
+                        <div>{{result}}</div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock content %}
+
+{% block script %}
+
+{% endblock script %}

@@ -21,11 +21,11 @@
             <div class="menu_items">
                 <ul>
                     <li><a href="{% url 'home' %}" class="{% if nav %}{% else %}active{% endif %}">Главная</a></li>
-                    <li><a href="#" class="{% if nav == 'quiz' %} active {% endif %}">Викторины</a></li>
+                    <li><a href="{% url 'quiz_all' %}" class="{% if nav == 'quiz' %} active {% endif %}">Викторины</a></li>
                     <li><a href="{% url 'allResults' %}" class="{% if nav == 'res' %} active {% endif %}">Результаты</a></li>
                     {% if user.is_staff %}
-<!--                        <li><a href="" class="{% if nav == 'addquiz' %} active {% endif %}">Проверка викторин</a></li>  switch if will realized checked function-->
-                            <li><a href="{% url 'add_quiz'  %}" class="{% if nav == 'addquiz' %} active {% endif %}">Предложить викторину</a></li>
+<!--                    <li><a href="" class="{% if nav == 'addquiz' %} active {% endif %}">Проверка викторин</a></li>  switch if will realized checked function-->
+                        <li><a href="{% url 'add_quiz'  %}" class="{% if nav == 'addquiz' %} active {% endif %}">Предложить викторину</a></li>
                     {% else %}
                         <li><a href="{% url 'add_quiz'  %}" class="{% if nav == 'addquiz' %} active {% endif %}">Предложить викторину</a></li>
                     {% endif %}
@@ -34,7 +34,7 @@
             </div>
             {% if user.is_authenticated %}
             <div class="right_menu">
-                <a href="{% url 'personal_account' %}" class="login"><img src="/{{user.icon}}" alt="иконка пользователя" width="24" height="24"><span>{{ user.username|slice:":10" }}</span></a>
+                <a href="{% url 'personal_account' user.pk %}" class="login"><img src="/{{user.icon}}" alt="иконка пользователя" width="24" height="24"><span>{{ user.username|slice:":10" }}</span></a>
             </div>
             {% else %}
             <div class="right_menu">

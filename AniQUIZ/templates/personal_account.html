@@ -8,11 +8,24 @@
 {% block content %}
 
 <div class="block_account">
-    <div class="icon_block">
+    <div class="block_settings">
         <div class="now_icon">
-            <img src="{}" alt="">
+            <label>Ваша иконка пользователя:</label>
+            <img src="/{{ user.icon }}" alt="" width="160" height="160">
         </div>
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
 
+
+            {{form.label_username }}
+            {{form.username}}
+            <!-- <label for="SwichIcon">Сменить икнку:</label>
+            <input type="File" id="SwichIcon" name="icon" value='{{ user.icon }}'>
+            <label for="username">ваш логин</label>
+            <input type="text" value="{{ user.username }}"> -->
+            <button type="submit">Сменить</button>
+        </form>
+        <a class="quiet" href="{% url 'logout' %}">Выйти</a>
     </div>
 </div>
 
