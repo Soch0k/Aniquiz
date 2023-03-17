@@ -12,21 +12,21 @@ $(document).on('click', '#start_quiz_btn', function(e) {
 
 
 $(document).on('click', '#next', function(e) {
-    console.log('hui')//delete-this-strok
     var check_is_answer = 0;
     for(let k = 0; k < $('#answers_box_ans div').length; k++) {
-        console.log(k)//delete-this-strok
         if($("#answer"+k).is(':checked')) {
-            console.log('hui')//delete-this-strok
             answers_list+=$('#idAnswer'+k).val()
             answers_list+=' '
-            console.log(answers_list)//delete-this-strok
+
+            check_is_answer++
         }
     }
-    if (answers_list !== 0) {
+    if (check_is_answer !== 0) {
         ajax_get_question(question_is)
         question_is++
     }else {
+        //$( "#answers_box_ans div" ).children().animate({'height': '68px', 'border': '1px solid red', 'color': 'red'}, 500)
+        $('#answers_box_ans').children().css({'height': '68px', 'border': '1px solid rgba(255, 90, 90, 0.63)'});
         alert('Выберите ответ')
     }
 })
@@ -85,7 +85,7 @@ function ajax_get_question (i) {
             var n = 0
             response.Answers.forEach(function(item) {
 
-                    var $answers_block = $( '<div class="answer">'+
+                    var $answers_block = $( '<div class="answer" id="box_for_answer">'+
                                                 '<label class="ans" for="answer'+n+'" id="label'+n+'">'+ item.answer +'</label>'+
                                                 '<input id="answer'+n+'" type="radio" name="ANSWER" value="0">'+
                                                 '<input hidden id="idAnswer'+n+'" value="'+item.id+'">'+
@@ -130,7 +130,7 @@ function ajax_get_question (i) {
 //    if(this.checked){
 //        console.log(this.avl())
 //    }else{
-//        console.log('huesos')
+//        
 //    }
 //})
 
@@ -140,44 +140,49 @@ function ajax_get_question (i) {
 //
 //});
 
-//$(document).on('click', '[name="ANSWER"]', function () {
-//    if($(this).is(':checked')) {
-//        console.log('hui')
-//    }
-//})
-
-$( "#answers_box" ).click(function( event ) {
-
-    if($('#label'+event.target.id.slice(6))) {
-        for(let i = 0; i < $('#answers_box div').length; i++) {
-            $('#label'+i).css('color', 'white')
-        }
-        $('#label'+event.target.id.slice(6)).css('color', '#d4ef25')
+$(document).on('click', '#box_for_answer', function () {
+    $('#answers_box_ans').children().css({'color': 'white', 'height': '70px', 'border': 'none'})
+    console.log($(this))
+    var inp = $(this).find('input[name="ANSWER"]')
+    if(inp.is(':checked')) {
+        $(this).css({'height': '68px', 'border': '1px solid #d4ef25', 'color': '#d4ef25'})
     }
-});
+
+})
+
+// $( "#answers_box" ).click(function( event ) {
+
+//     if($('#label'+event.target.id.slice(6))) {
+//         for(let i = 0; i < $('#answers_box div').length; i++) {
+//             $('#label'+i).css('color', 'white')
+//         }
+//         $('#label'+event.target.id.slice(6)).css('color', '#d4ef25')
+//     }
+// });
 
 
 
-$('.answer input[type=radio]').change(function (e) { 
-    e.preventDefault();
-    $('#next').css('background-color', 'red');
-    $('.quiz_container_with_questions').css('background-color', 'red');
-    array.forEach(element => {
+// $('.answer input[type=radio]').change(function (e) { 
+//     e.preventDefault();
+//     $('#next').css('background-color', 'red');
+//     $('.quiz_container_with_questions').css('background-color', 'red');
+//     array.forEach(element => {
         
-    });
+//     });
 
-    $('.answer .ans').addClass();
-});
+//     $('.answer .ans').addClass();
+// });
 
-$('input[type=radio][name=ANSWER]').change(function() {
-    $('#next').css('background-color', 'red');
-    if (this.value == 'answer0') {
-        console.log('huesos')
-    }
-    else if (this.value == 'transfer') {
-        $('#next.next_question').css('background-color', 'red');
-    }
-});
+// $('input[type=radio][name=ANSWER]').change(function() {
+//     console.log
+//     $('#next').css('background-color', 'red');
+//     if (this.value == 'answer0') {
+//         
+//     }
+//     else if (this.value == 'transfer') {
+//         $('#next.next_question').css('background-color', 'red');
+//     }
+// });
 
 
 

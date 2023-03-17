@@ -24,7 +24,8 @@
             <label for="a{{answer.id}}">Ответ:</label>
             <input class="{% if answer.correct %}correct{% endif %}" type="text" name="answer" id="a{{answer.id}}" value="{{answer.answer}}">
             <input hidden value="{{answer.id}}" name="idAnswer">
-            <button type="submit">Изменить</button>
+            <button type="submit" id="change_answer">Изменить</button>
+            <div class="sucksess" id="sucksess" {% if answer.correct %}{% else %}hidden{% endif %}></div>
         </form>
     {% endfor %}
     <a href="{% url 'add_quiz_n' question.quiz.pk %}">Вернуться</a>

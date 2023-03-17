@@ -114,10 +114,6 @@
     background-color: #263238;
     margin-bottom: 40px;
 }
-
-.answers_box {
-
-}
 .question_name {
     font-size: 26px;
     color: white;
@@ -128,9 +124,10 @@
     text-align: center;
     width: 100%;
     padding-bottom: 25px;
+    
 }
 input[type=radio] {
-
+    display: none;
 }
 .answer, .answer_results {
     margin: 2px 10px;
@@ -170,4 +167,12 @@ input[type=radio] {
 }
 .block_question_result {
     margin-bottom: 500px;
+}
+
+.quizs_block_all .quiz_block_someone {
+    margin-bottom: 40px;
+}
+.quiz_result_all {
+    display: flex;
+    flex-wrap: wrap;
 }

@@ -8,7 +8,7 @@
     <a href="{% url 'home' %}">Главная</a>
 </div>
 
-<div class="quizs_block_all">
+<div class="quizs_block_all quiz_result_all">
     {% for quiz, rating in ModelAndRating.pairs %}
     {% for i in quiz %}
     <div class="quiz_block_someone cards">

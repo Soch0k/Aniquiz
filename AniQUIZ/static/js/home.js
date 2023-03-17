@@ -6,9 +6,7 @@ $('#nextSlide').click(function (e) {
         margin = 0
     }
     $('.cards').css('margin-left', margin)
-    
-    console.log('huesos')
-    
+
     e.preventDefault();
     
     numClick += 1

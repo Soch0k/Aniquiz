@@ -6,6 +6,9 @@ body {
 
 }
 
+.popular_container {
+    overflow: hidden;
+}
 .main_container {
     padding: 0 30px;
     margin-top: 30px;
@@ -50,7 +53,7 @@ body {
     margin-right: 20px;
 }
 .cards .card img {
-    border-radius: 10px;
+    border-radius: 10px 10px 0 0;
     max-height: 270px;
 }
 .block_card_info {
@@ -67,16 +70,18 @@ body {
     padding: 3px 15px 3px 40px;
 }
 .author .avatar {
+    display: flex;
     width: 30px;
     height: 30px;
     border-radius: 50%;
     background: url(../img/user_icons/lufi.jpeg) round;
-    position: absolute;
+
     margin-top: 0px;
     margin-left: -35px;
+
 }
 .author p {
-    margin: 0;
+    margin: -30px 0 0 0;
     font-family: Montserrat,sans-serif;
     font-weight: 500;
     font-size: 14px;

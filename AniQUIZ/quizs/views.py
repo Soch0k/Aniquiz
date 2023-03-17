@@ -191,6 +191,16 @@ def quizView(request, pk):
     if request.user.pk:
         form = models.Quiz.objects.filter(pk=pk)
         questions = models.Questions.objects.filter(quiz=form[0].pk)
+
+        quiz = models.Quiz.objects.get(pk=pk)
+
+
+        marks = quiz.rating.split()
+        try:
+            rating = round(int(marks[0]) / int(marks[1]), 2)
+        except:
+            rating = 0
+
         answers = models.Answers
         data = {
             'pkQuiz': pk,
@@ -198,6 +208,7 @@ def quizView(request, pk):
             'questions': questions,
             'answers': answers,
             'nav': 'quiz',
+            'result': rating,
         }
 
         return render(request, 'quiz.html', data)
@@ -314,7 +325,7 @@ def questionRedactView(request, pk):
             if request.FILES:
                 her = 'static/img/quizs_img/questions_img/' + request.FILES['image']._get_name()
                 models.Questions.objects.filter(pk=pk).update(image=her)
-        if request.POST['idAnswer']:
+        if request.POST.get('idAnswer'):
             models.Answers.objects.filter(pk=request.POST['idAnswer']).update(answer=request.POST['answer'])
 
 
@@ -324,6 +335,7 @@ def questionRedactView(request, pk):
         'question': question[0],
         'answers': answers,
         'formQuestion': form,
+        'nav': 'addquiz',
     }
 
     return render(request, 'redact/editQuestion.html', data)
@@ -374,10 +386,17 @@ def quizAllView(request):
         except:
             rating[rating_pk.pk] = (0)
 
-    QuizAndRating = dict(pairs=zip(model, rating))
+    ratingList = []
+
+    for key in rating:
+        ratingList.append(rating[key])
+
+    
+    QuizAndRating = dict(pairs=zip(model, ratingList))
 
     data = {
-        'QuizAndRating': QuizAndRating
+        'QuizAndRating': QuizAndRating,
+        'nav': 'quiz',
     }
 
     return render(request, 'all_quiz.html', data)

@@ -1,0 +1,17 @@
+.block-cards {
+    display: flex;
+    flex-wrap: wrap;
+}
+.block-cards .card {
+    display: block;
+    width: 382px;
+    margin: 20px;
+
+    background-color: #263238;
+
+    border-radius: 15px;
+}
+.card a img {
+    max-height: 220px;
+    border-radius: 15px 15px 0 0;
+} 

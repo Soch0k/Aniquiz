@@ -198,3 +198,4 @@ $('#question_image').change(function() {
         fr.readAsDataURL(this.files[0]);
     }
 })
+
