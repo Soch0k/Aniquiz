@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}AniQUIZ-Home{% endblock title %}
+
+{% block content %}
+
+  <form method="POST">
+    <p>Вы уверены?</p>
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button class="button_delete_quiz" type="submit">Да</button>
+  </form>
+
+{% endblock content %}

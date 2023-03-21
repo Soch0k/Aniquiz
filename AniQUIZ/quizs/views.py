@@ -4,6 +4,7 @@ from django.views import generic, View
 from django.views.generic.edit import UpdateView, DeleteView, CreateView
 from django.urls import reverse_lazy
 from django.http import HttpResponse, JsonResponse, HttpResponseRedirect
+from django.contrib.auth.mixins import LoginRequiredMixin
 from . import forms, models
 
 
@@ -402,9 +403,10 @@ def quizAllView(request):
 
     return render(request, 'all_quiz.html', data)
 
-
-
-
-
+class deleteQuizView(DeleteView, LoginRequiredMixin):
+    model = models.Quiz
+    template_name = 'redact/delete.html'
+    success_url = reverse_lazy('home')
+    login_url = 'login'
 
 
