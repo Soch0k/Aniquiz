@@ -50,6 +50,9 @@ header {
 .menu_items, .right_menu {
     margin: auto 0px;
 }
+.right_menu a img {
+    padding-right: 5px;
+}
 .menu_items ul {
     display: flex;
     list-style: none;

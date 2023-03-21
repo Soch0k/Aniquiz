@@ -31,6 +31,17 @@ input {
     color: white;
     width: 580px;
 }
+.ans input[type="radio"] {
+    position: absolute;
+    margin-top: -15px;
+    left: 260px;
+}
+.label_ans {
+    margin-top: 15px;
+}
+.ans {
+    display: relative;
+}
 .button {
     margin-top: 10px;
     padding: 5px 10px;
@@ -170,6 +181,8 @@ input[type="file"] {
     display: flex;
     flex-wrap: wrap;
     width: 450px;
+
+    color: white;
 }
 .Form_Redact .btn_add_answers {
     margin-top: 20px;
@@ -189,8 +202,11 @@ input[type="file"] {
     display: flex;
     text-align: center;
     align-items: center;
+
+    color: white;
+    margin-right: 10px;
 }
-.blockEditAnswers .Form_Redact_ans button {
+.blockEditAnswers .Form_Redact_ans button, #btn_save {
     margin-left: 10px;
     font-size: 16px;
     background-color: #263238;
@@ -199,7 +215,18 @@ input[type="file"] {
 .blockEditAnswers {
     margin-top: 30px;
 }
+.blockEditAnswers a {
+    display: flex;
+    color: black;
 
+    background-color: #d4ef25;
+    padding: 10px 20px;
+
+    width: 100px;
+    justify-content: right;
+
+    clip-path: polygon(0% 50%, 8% 0%, 100% 0%, 94% 50%, 100% 100%, 8% 100%);
+}
 
 .sucksess {
     position: relative;
@@ -207,5 +234,5 @@ input[type="file"] {
     height: 40px;
 
     margin: auto 10px;
-    background: url(../img/interactive_icons/sucsess.png) round;
+    background: url(../img/interactive_icons/true.png) round;
 }

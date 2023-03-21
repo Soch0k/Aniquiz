@@ -49,7 +49,7 @@ $(document).on('click', '#btn_add_answer', function(e) {
                     '<label for="answer'+num+'">Напишите ответ '+num+'</label>'+
                     '<label for="correct_answer_'+num+'" class="is_correct">ответ верный</label>'+
                     '<input id="correct_answer_'+num+'" type="radio" name="correct" value="answer'+num+'">'+
-                    '<input id="answer'+num+'" type="text" name="answer'+num+'">'+
+                    '<input class="label_ans" id="answer'+num+'" type="text" name="answer'+num+'">'+
                 '</div>')
     }
     $('#answer_add_box').append($ans)

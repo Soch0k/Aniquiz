@@ -141,12 +141,13 @@ def quizAdd_answers(request, pk):
 
                     else:
                         try:
-                            post = models.Answers.objects.create(
-                                answer=req[key],
-                                question_pk_id=pk,
-                                correct=0,
-                            )
-                            post.save()
+                            if key != req['correct']:
+                                post = models.Answers.objects.create(
+                                    answer=req[key],
+                                    question_pk_id=pk,
+                                    correct=0,
+                                )
+                                post.save()
                         except:
                             errors = {
                                 'pk_question': pk,
