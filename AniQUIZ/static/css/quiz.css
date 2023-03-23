@@ -3,7 +3,7 @@
 
 
 }
-.start .start_quiz {
+.start .start_quiz, .delete .delete_quiz, .edit .edit_quiz {
     border: 0;
     margin: 0;
     padding: 0;
@@ -14,8 +14,14 @@
     background-color: #3A454B; 
     color: white;
 }
-.start .start_quiz:hover, .next .next_question:hover {
+.start .start_quiz:hover, .next .next_question:hover, .edit .edit_quiz:hover {
     color: #d4ef25;
+}
+.delete .delete_quiz {
+    color: rgb(255, 40, 40);
+}
+.edit .edit_quiz {
+    display: block;
 }
 .next {
     margin: auto 10px;
@@ -62,7 +68,7 @@
 .quiz_container .card img {
     border-radius: 10px;
 }
-.quiz_container .card .start {
+.quiz_container .card .start, .quiz_container .card .delete, .quiz_container .card .edit {
     text-align: center;
     margin: 10px auto; 
     border-radius: 10px;

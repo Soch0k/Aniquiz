@@ -190,7 +190,7 @@ def addQuestion(request):
 
 
 def quizView(request, pk):
-    if request.user.pk:
+    if request.user:
         form = models.Quiz.objects.filter(pk=pk)
         questions = models.Questions.objects.filter(quiz=form[0].pk)
 
@@ -407,6 +407,70 @@ class deleteQuizView(DeleteView, LoginRequiredMixin):
     model = models.Quiz
     template_name = 'redact/delete.html'
     success_url = reverse_lazy('home')
-    login_url = 'login'
+    login_url = 'authentication'
 
 
+def deleteQuestionView(request, pk):
+    if request.user:
+        if request.method == 'POST':
+            model = models.Questions.objects.get(pk=pk)
+            model.delete()
+            return redirect('add_quiz_n', pk)
+    else:
+        return redirect('authentication')
+
+    return render(request,)
+    
+
+def SuplyQuizView(request, pk):
+    if request.POST:
+        if request.user.is_superuser:
+            if request.POST.get('suply'):
+                models.Quiz.objects.filter(pk=pk).update(status=True)
+                return redirect('checking_quizs')
+        else:
+            return redirect('Не достаточно прав')
+    else:
+        data = {
+            'status': True,
+            'quiz': pk,
+        }
+        return render(request, 'result.html', data)
+
+
+def CheckingQuizView(request):
+    model = models.Quiz.objects.filter(status=0)
+
+    rating = {}
+
+    for rating_pk in model:
+        marks = rating_pk.rating.split()
+        try:
+            rating[rating_pk.pk] = (round(int(marks[0]) / int(marks[1]), 2))
+        except:
+            rating[rating_pk.pk] = (0)
+
+    ratingList = []
+
+    for key in rating:
+        ratingList.append(rating[key])
+
+    
+    QuizAndRating = dict(pairs=zip(model, ratingList))
+
+    data = {
+        'QuizAndRating': QuizAndRating,
+        'nav': 'addquiz',
+        'admin': True
+    }
+
+    return render(request, 'all_quiz.html', data)
+
+
+
+
+# class deleteQuestionView(DeleteView, LoginRequiredMixin):
+#     model = models.Questions
+#     template_name = 'redact/delete.html'
+#     success_url = reverse_lazy('home')
+#     login_url = 'login'

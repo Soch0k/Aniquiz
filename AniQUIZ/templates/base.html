@@ -24,8 +24,8 @@
                     <li><a href="{% url 'quiz_all' %}" class="{% if nav == 'quiz' %} active {% endif %}">Викторины</a></li>
                     <li><a href="{% url 'allResults' %}" class="{% if nav == 'res' %} active {% endif %}">Результаты</a></li>
                     {% if user.is_staff %}
-<!--                    <li><a href="" class="{% if nav == 'addquiz' %} active {% endif %}">Проверка викторин</a></li>  switch if will realized checked function-->
-                        <li><a href="{% url 'add_quiz'  %}" class="{% if nav == 'addquiz' %} active {% endif %}">Предложить викторину</a></li>
+                        <li><a href="{% url 'checking_quizs' %}" class="{% if nav == 'addquiz' %} active {% endif %}">Проверка викторин</a></li>
+                        <!-- <li><a href="{% url 'add_quiz'  %}" class="{% if nav == 'addquiz' %} active {% endif %}">Предложить викторину</a></li> -->
                     {% else %}
                         <li><a href="{% url 'add_quiz'  %}" class="{% if nav == 'addquiz' %} active {% endif %}">Предложить викторину</a></li>
                     {% endif %}

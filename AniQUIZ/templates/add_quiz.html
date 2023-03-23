@@ -14,6 +14,7 @@
                     <div class="question_block">
                         <div class="btn_redact_container">
                             <a class="btn_redact" href="{% url 'redact_question' question.pk %}">Изменить</a>
+                            <a class="btn_delete" href="{% url 'delete_question' question.pk %}">Удалить</a>
                         </div>
                         <div class="question">
                             <h5>Вопрос:</h5>

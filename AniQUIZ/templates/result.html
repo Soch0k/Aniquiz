@@ -7,53 +7,73 @@
 <!--<div class="btn_back_results">-->
 <!--    <a href=""></a>-->
 <!--</div>-->
-{% if ratingStatus %}
-    {% for rating in ratingStatus %}
-        <form class="mark" method="POST">
-            {% csrf_token %}
-            <label>Поставте отценку этой викторине😊</label>
-            <input hidden type="text" name="ThisRating" value="true">
-            <div class="rating-area">
-                <input type="radio" id="star-5" name="rating" value="5" {% if rating.mark == 5 %}checked{% endif %}>
-                <label for="star-5" title="Оценка «5»"></label>
-                <input type="radio" id="star-4" name="rating" value="4" {% if rating.mark == 4 %}checked{% endif %}>
-                <label for="star-4" title="Оценка «4»"></label>
-                <input type="radio" id="star-3" name="rating" value="3" {% if rating.mark == 3 %}checked{% endif %}>
-                <label for="star-3" title="Оценка «3»"></label>
-                <input type="radio" id="star-2" name="rating" value="2" {% if rating.mark == 2 %}checked{% endif %}>
-                <label for="star-2" title="Оценка «2»"></label>
-                <input type="radio" id="star-1" name="rating" value="1" {% if rating.mark == 1 %}checked{% endif %}>
-                <label for="star-1" title="Оценка «1»"></label>
-            </div>
-            <div class="bntRatingContainer">
-                <button class="bntRating" type="submit">оценить</button>
-            </div>
-        </form>
-    {% endfor %}
-{% else %}
-    <form class="mark" method="POST">
-        {% csrf_token %}
-        <label>Поставте отценку этой викторине😊</label>
-        <input hidden type="text" name="ThisRating" value="true">
-        <div class="rating-area">
-            <input type="radio" id="star-5" name="rating" value="5" {% if rating.mark == '5' %}checked{% endif %}>
-            <label for="star-5" title="Оценка «5»"></label>
-            <input type="radio" id="star-4" name="rating" value="4" {% if rating.mark == '4' %}checked{% endif %}>
-            <label for="star-4" title="Оценка «4»"></label>
-            <input type="radio" id="star-3" name="rating" value="3" {% if rating.mark == '3' %}checked{% endif %}>
-            <label for="star-3" title="Оценка «3»"></label>
-            <input type="radio" id="star-2" name="rating" value="2" {% if rating.mark == '2' %}checked{% endif %}>
-            <label for="star-2" title="Оценка «2»"></label>
-            <input type="radio" id="star-1" name="rating" value="1" {% if rating.mark == '1' %}checked{% endif %}>
-            <label for="star-1" title="Оценка «1»"></label>
+
+    {% if status %}
+    
+        <div class="status">
+            <form action="{% url 'suply_quiz' quiz %}" method="POST">
+                {% csrf_token %}
+                <label class="label__suply" for="suply">Вы подтверждаите что в этой викторине не было совершено нарушений?</label>
+                <input type="checkbox" name="suply" id="suply">
+                <div class="buttons_suply_or_delete">        
+                    <button type="submit">Да</button>
+                    <div class="delete_this_quiz">
+                        <a id="delete_this_quiz" href="{% url 'delete_quiz' quiz %}">удалить эту викторину</a>
+                    </div>
+                </div>
+            </form>
+            
         </div>
-        <div class="bntRatingContainer">
-            <button class="bntRating" type="submit">оценить</button>
-        </div>
-    </form>
-{% endif %}
+    {% else %}
+        {% if ratingStatus %}
+            {% for rating in ratingStatus %}
+                <form class="mark" method="POST">
+                    {% csrf_token %}
+                    <label>Поставте отценку этой викторине😊</label>
+                    <input hidden type="text" name="ThisRating" value="true">
+                    <div class="rating-area">
+                        <input type="radio" id="star-5" name="rating" value="5" {% if rating.mark == 5 %}checked{% endif %}>
+                        <label for="star-5" title="Оценка «5»"></label>
+                        <input type="radio" id="star-4" name="rating" value="4" {% if rating.mark == 4 %}checked{% endif %}>
+                        <label for="star-4" title="Оценка «4»"></label>
+                        <input type="radio" id="star-3" name="rating" value="3" {% if rating.mark == 3 %}checked{% endif %}>
+                        <label for="star-3" title="Оценка «3»"></label>
+                        <input type="radio" id="star-2" name="rating" value="2" {% if rating.mark == 2 %}checked{% endif %}>
+                        <label for="star-2" title="Оценка «2»"></label>
+                        <input type="radio" id="star-1" name="rating" value="1" {% if rating.mark == 1 %}checked{% endif %}>
+                        <label for="star-1" title="Оценка «1»"></label>
+                    </div>
+                    <div class="bntRatingContainer">
+                        <button class="bntRating" type="submit">оценить</button>
+                    </div>
+                </form>
+            {% endfor %}
+        {% else %}
+            <form class="mark" method="POST">
+                {% csrf_token %}
+                <label>Поставте отценку этой викторине😊</label>
+                <input hidden type="text" name="ThisRating" value="true">
+                <div class="rating-area">
+                    <input type="radio" id="star-5" name="rating" value="5" {% if rating.mark == '5' %}checked{% endif %}>
+                    <label for="star-5" title="Оценка «5»"></label>
+                    <input type="radio" id="star-4" name="rating" value="4" {% if rating.mark == '4' %}checked{% endif %}>
+                    <label for="star-4" title="Оценка «4»"></label>
+                    <input type="radio" id="star-3" name="rating" value="3" {% if rating.mark == '3' %}checked{% endif %}>
+                    <label for="star-3" title="Оценка «3»"></label>
+                    <input type="radio" id="star-2" name="rating" value="2" {% if rating.mark == '2' %}checked{% endif %}>
+                    <label for="star-2" title="Оценка «2»"></label>
+                    <input type="radio" id="star-1" name="rating" value="1" {% if rating.mark == '1' %}checked{% endif %}>
+                    <label for="star-1" title="Оценка «1»"></label>
+                </div>
+                <div class="bntRatingContainer">
+                    <button class="bntRating" type="submit">оценить</button>
+                </div>
+            </form>
+        {% endif %}
+    {% endif %}
+
 {% for answers, result, questions in ansersAndResulstAndQuestions.pairs %}
-<div class="quiz_container_with_questions_result">
+<div class="quiz_container_with_questions_result" {% if not status %}hidden{% endif %}>
     <div class="question_name" id="question_text">
         {{questions.question}}
     </div>

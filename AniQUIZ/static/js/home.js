@@ -1,8 +1,8 @@
-let numClick = 0
+let numClick = 1
 let margin = -405
 $('#nextSlide').click(function (e) { 
     if(numClick == $('.cards').children.length) {
-        numClick = -1
+        numClick = 0
         margin = 0
     }
     $('.cards').css('margin-left', margin)

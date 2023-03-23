@@ -98,21 +98,24 @@ function ajax_get_question (i) {
         },
 
         error: function(response){
-            $.ajax({
-                url: 'result/'+$('#quiz_pk').val(),
-                type: 'POST',
-                //dataType: "json",
+            if ($('#is_admin').val() == 'True') {
+                window.location.replace("suply/"+$('#quiz_pk').val())
+            }else {
+                $.ajax({
+                    url: 'result/'+$('#quiz_pk').val(),
+                    type: 'POST',
+                    //dataType: "json",
 
-                data: {
-                    'answers': answers_list,
-                    'csrfmiddlewaretoken': token
-                },
+                    data: {
+                        'answers': answers_list,
+                        'csrfmiddlewaretoken': token
+                    },
 
 
-            })
+                })
 
-            window.location.replace("result/"+$('#quiz_pk').val())
-
+                window.location.replace("result/"+$('#quiz_pk').val())
+            }
         },
     });
 }

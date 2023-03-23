@@ -164,16 +164,26 @@ input[type="file"] {
     margin-bottom: 20px;
 }
 .questions_added .question_block .btn_redact_container{
+    display: flex;
+    justify-content: space-between;
     margin-bottom: 20px;
     margin-top: -10px;
+}
+.question_block .btn_redact_container a {
+    cursor: pointer;
 }
 .questions_added .question_block .btn_redact_container .btn_redact {
     color: #d4ef25a2;
     
 }
+.question_block .btn_redact_container .btn_delete {
+    color: rgba(255, 36, 36, 0.582);
+}
+.question_block .btn_redact_container .btn_delete:hover {
+    color: rgb(255, 0, 0);
+}
 .questions_added .question_block .btn_redact_container .btn_redact:hover {
     color: #ddff00;
-    cursor: pointer;
 }
 
 
@@ -235,4 +245,32 @@ input[type="file"] {
 
     margin: auto 10px;
     background: url(../img/interactive_icons/true.png) round;
+}
+
+
+
+.status form {
+    display: flex;
+    flex-wrap: wrap;
+
+    width: 500px;
+}
+.status form button {
+    padding: 10px 20px;
+    margin: 0 auto;
+    background-color: green;
+    cursor: pointer;
+    margin-top: -9px;
+    border: 2px solid black;
+}
+.buttons_suply_or_delete {
+    display: flex;
+    flex-wrap: nowrap;
+    margin-top: 20px;
+}
+.buttons_suply_or_delete #delete_this_quiz {
+    padding: 8px 20px;
+    background-color: rgba(255, 0, 0, 0.733);
+    margin-left: 10px;
+    border: 2px solid black;
 }

@@ -6,7 +6,7 @@
     {% for quiz in quiz %}
         <div class="quiz_container" id="quiz_container">
             <div class="navigation">
-                <a href="home.html">Вернуться</a>
+                <a href="{% url 'home' %}">Вернуться</a>
             </div>
             <input id="quiz_pk" hidden value="{{ quiz.pk }}">
             <div class="card">
@@ -30,9 +30,14 @@
                 <div class="start">
                     <button type="button" class="start_quiz" id="start_quiz_btn">Начать</button>
                 </div>
-                {% if user.is_superuser %}
+                {% if user.is_superuser or user == quiz.user %}
                     <div class="delete">
                         <a href="{% url 'delete_quiz' quiz.pk %}" type="button" class="delete_quiz" id="delete_quiz_btn">Удалить</a>
+                    </div>
+                {% endif %}
+                {% if user == quiz.user %}
+                    <div class="edit">
+                        <a href="{% url 'add_quiz_n' quiz.pk %}" type="button" class="edit_quiz" id="delete_quiz_btn">Изменить вопросы</a>
                     </div>
                 {% endif %}
             </div>
@@ -49,6 +54,7 @@
             </div>
             <div class="next">
                 <button id="next" class="next_question">Ответить</button>
+                <input type="text" id="is_admin" hidden value="{% if user.is_superuser %}True{% else %}False{% endif %}">
             </div>
         </div>
     {% endfor %}
