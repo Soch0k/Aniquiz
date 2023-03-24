@@ -18,7 +18,10 @@
     color: #d4ef25;
 }
 .delete .delete_quiz {
+    display: flex;
     color: rgb(255, 40, 40);
+    width: 150px;
+    justify-content: center;
 }
 .edit .edit_quiz {
     display: block;

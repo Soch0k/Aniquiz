@@ -31,29 +31,6 @@ $(document).on('click', '#next', function(e) {
     }
 })
 
-//$.ajax({
-//    url: "{% url 'jquery' %}",
-//    datatype: 'json',
-//    type: 'GET',
-//    data
-//    success: function (response) {
-//        console.log(response)
-//    }
-//});
-
-
-
-//$.ajax("{% url 'jquery' %}", {
-//    data: 1,
-//    success: function(data) {
-//        data.forEach(function(el) {
-//            console.log(data);
-//            const img = document.createElement('img');
-//            img.src = el.thumbnail;
-//            document.querySelector('body').appendChild(img);
-//        });
-//    }
-//});
 
 function redirectOnQuizResult () {
      var xhr = new XMLHttpRequest();
@@ -119,30 +96,6 @@ function ajax_get_question (i) {
         },
     });
 }
-
-//if ($('input[name="ANSWER"]').is(':checked')) {
-//    $('label[for="'+ $('input[name="ANSWER"]').id +'"]').css("background-color", "yellow")
-//}
-
-//$('.ans').click(function(){
-//    $('label[for="'+ $('input[name="ANSWER"]').id +'"]').css("background-color", "yellow")
-//
-//})
-
-//$('.ans').change(function(){
-//    if(this.checked){
-//        console.log(this.avl())
-//    }else{
-//        
-//    }
-//})
-
-//$('#answers_box').on('change', 'input[name="ANSWER"]', function() {
-//  console.log('радио изменен');
-//  console.log($(this).val());
-//
-//});
-
 $(document).on('click', '#box_for_answer', function () {
     $('#answers_box_ans').children().css({'color': 'white', 'height': '70px', 'border': 'none'})
     console.log($(this))
@@ -152,40 +105,3 @@ $(document).on('click', '#box_for_answer', function () {
     }
 
 })
-
-// $( "#answers_box" ).click(function( event ) {
-
-//     if($('#label'+event.target.id.slice(6))) {
-//         for(let i = 0; i < $('#answers_box div').length; i++) {
-//             $('#label'+i).css('color', 'white')
-//         }
-//         $('#label'+event.target.id.slice(6)).css('color', '#d4ef25')
-//     }
-// });
-
-
-
-// $('.answer input[type=radio]').change(function (e) { 
-//     e.preventDefault();
-//     $('#next').css('background-color', 'red');
-//     $('.quiz_container_with_questions').css('background-color', 'red');
-//     array.forEach(element => {
-        
-//     });
-
-//     $('.answer .ans').addClass();
-// });
-
-// $('input[type=radio][name=ANSWER]').change(function() {
-//     console.log
-//     $('#next').css('background-color', 'red');
-//     if (this.value == 'answer0') {
-//         
-//     }
-//     else if (this.value == 'transfer') {
-//         $('#next.next_question').css('background-color', 'red');
-//     }
-// });
-
-
-

@@ -6,13 +6,13 @@ from django.urls import reverse_lazy
 from django.http import HttpResponse, JsonResponse, HttpResponseRedirect
 from django.contrib.auth.mixins import LoginRequiredMixin
 from . import forms, models
-
+from time import sleep
 
 import json
 
 
 def AniquizListView(request):
-    model = models.Quiz.objects.all()
+    model = models.Quiz.objects.filter(status=1)
 
     RatingForSorted = {}
 
@@ -230,7 +230,7 @@ def returnThisQuestion(request, quiz, num):
 
 
 def quizResultView(request, quiz):
-    if request.user.pk:
+    if request.user:
         if request.POST.get('answers'):
             if models.Results.objects.filter(quiz_pk_id=quiz, user_id=request.user.id):
                 models.Results.objects.filter(quiz_pk_id=quiz, user_id=request.user.id).update(dict_answers=''.join(request.POST.get('answers')))
@@ -263,7 +263,7 @@ def quizResultView(request, quiz):
                     quiz_id=quiz,
                     mark=int(request.POST.get('rating'))
                 )
-
+        sleep(1)
         questions = models.Questions.objects.filter(quiz_id=quiz)
         results = models.Results.objects.get(quiz_pk_id=quiz, user_id=request.user.id).dict_answers
 
@@ -377,7 +377,7 @@ def QuizsAndRating(request):
 
 
 def quizAllView(request):
-    model = models.Quiz.objects.all()
+    model = models.Quiz.objects.filter(status=1)
 
     rating = {}
 
@@ -415,11 +415,12 @@ def deleteQuestionView(request, pk):
         if request.method == 'POST':
             model = models.Questions.objects.get(pk=pk)
             model.delete()
-            return redirect('add_quiz_n', pk)
+            # print(models.Answers.objects.filter(pk=pk).get(quiz))
+            return redirect('add_quiz_n', 13)
     else:
         return redirect('authentication')
 
-    return render(request,)
+    return render(request, 'redact/delete.html')
     
 
 def SuplyQuizView(request, pk):
@@ -434,6 +435,7 @@ def SuplyQuizView(request, pk):
         data = {
             'status': True,
             'quiz': pk,
+            'nav': 'addquiz',
         }
         return render(request, 'result.html', data)
 
@@ -468,9 +470,3 @@ def CheckingQuizView(request):
 
 
 
-
-# class deleteQuestionView(DeleteView, LoginRequiredMixin):
-#     model = models.Questions
-#     template_name = 'redact/delete.html'
-#     success_url = reverse_lazy('home')
-#     login_url = 'login'
