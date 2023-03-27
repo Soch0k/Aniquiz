@@ -80,16 +80,20 @@ def quizCreateView(request):
 
 def quizAdd_questions(request, pk):
     if request.user.pk:
-        form = forms.questionForm
+        form = forms.questionFormWithImg
         errors = ''
         if request.method == 'POST':
-            formQestion = forms.questionForm(request.POST, request.FILES)
+            formQestion = forms.questionFormWithImg(request.POST, request.FILES)
             if formQestion.is_valid():
                 post = formQestion.save(commit=False)
                 post.save()
                 return redirect('add_quiz_answers', pk=post.pk)
             else:
-                errors = formQestion.errors
+                formQestionWithout = forms.questionFormWithoutImg(request.POST)
+                if formQestionWithout.is_valid():
+                    post = formQestionWithout.save(commit=False)
+                    post.save()
+                    return redirect('add_quiz_answers', pk=post.pk)
 
 
         questions = models.Questions.objects.filter(quiz=pk)
@@ -170,10 +174,10 @@ def quizAdd_answers(request, pk):
 
 def addQuestion(request):
     if request.user.pk:
-        form = forms.questionForm
+        form = forms.questionFormWithImg
         errors = ''
         if request.method == 'POST':
-            form = forms.questionForm
+            form = forms.questionFormWithImg
             if form.is_valid():
                 form.save()
                 return redirect('home')
