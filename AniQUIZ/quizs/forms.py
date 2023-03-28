@@ -10,18 +10,11 @@ class QuizForm(ModelForm):
         fields = ['title', 'imageScreensaver', 'category', 'description']
 
 
-class questionFormWithImg(ModelForm):
+class questionForm(ModelForm):
     class Meta:
         model = models.Questions
 
         fields = ['question', 'image', 'quiz']
-
-
-class questionFormWithoutImg(ModelForm):
-    class Meta:
-        model = models.Questions
-
-        fields = ['question', 'quiz']
 
 
 class answerForm(ModelForm):

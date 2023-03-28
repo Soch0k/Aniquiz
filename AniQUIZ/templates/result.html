@@ -77,7 +77,7 @@
     <div class="question_name" id="question_text">
         {{questions.question}}
     </div>
-    <img src="{{questions.image.url|slice:'6:'}}" alt="" width="100%" id="question_image">
+    <img src="{% if questions.image %} {{questions.image.url|slice:'6:'}} {% else %} no/img {% endif %}" alt="" width="100%" id="question_image">
     <div class="answers_box" id="answers_box">
         {% for answer in answers %}
             <div class="answer_results">
