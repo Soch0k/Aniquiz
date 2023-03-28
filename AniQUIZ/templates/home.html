@@ -9,16 +9,16 @@
     <div class="popular_tests">
         <div class="popular_header">
             <div class="first_block">
-                <a href="#"><h1>Популярные тесты</h1></a>
+                <a href="#"><h1>Топ 10 популярных тестов</h1></a>
                 <p>Тесты набравшие наибольшее количество лайков</p>
             </div>
             <div class="second_block">
-                <a href="#">Все тесты</a>
+                <a href="{% url 'quiz_all' %}">Все тесты</a>
             </div>
         </div>
         <div class="popular_container">
             <div class="cards">
-                {% for i, result in ModelAndRating.pairs|slice:":6" %}
+                {% for i, result in ModelAndRating.pairs|slice:":10" %}
                     {% for quiz in i %}
                     <div class="card">
                     <a href="{% url 'quiz' quiz.pk %}"><img src="/{{quiz.imageScreensaver}}" alt="" width="382"></a>
