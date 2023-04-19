@@ -32,8 +32,7 @@ class RatingStatus(models.Model):
 
 class Questions(models.Model):
     question = models.CharField(max_length=64)
-    image = models.ImageField(upload_to="static/img/quizs_img/questions_img", null=True, blank=True,
-                              default="static/img/user/icon_user/Standard_icon.png")
+    image = models.ImageField(upload_to="static/img/quizs_img/questions_img", null=True, blank=True)
     quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE)
 
     def __str__(self):

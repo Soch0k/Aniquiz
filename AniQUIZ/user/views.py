@@ -24,7 +24,7 @@ class SignUp(generic.CreateView):
 
 
 def RegAndLog (request):
-    error = {}
+    data = {}
 
     if request.method == "POST":
         if request.POST.get('Log'):
@@ -32,16 +32,26 @@ def RegAndLog (request):
              if user:
                  auth.login(request, user)
                  return redirect('home')
+             else:
+                 data = {
+                     'usernameLog': request.POST.get('username'),
+                     'errors': 'errors'
+                 }
+
         else:
             form = forms.CustomUserCreationForm(request.POST)
             if form.is_valid():
                 user = form.save()
                 auth.login(request, user)
                 return redirect('home')
+            else:
+                data = {
+                    'username': request.POST.get('username'),
+                    'email': request.POST.get('email'),
+                    'errors': 'errors'
+                }
 
-
-
-    return render(request, 'LogAndReg.html')
+    return render(request, 'LogAndReg.html', data)
 
 
 # def personalAccountView(request, pk):

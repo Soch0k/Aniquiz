@@ -230,7 +230,7 @@ def returnThisQuestion(request, quiz, num):
 
 
 def quizResultView(request, quiz):
-    if request.user:
+    if request.user.id:
         if request.POST.get('answers'):
             if models.Results.objects.filter(quiz_pk_id=quiz, user_id=request.user.id):
                 models.Results.objects.filter(quiz_pk_id=quiz, user_id=request.user.id).update(dict_answers=''.join(request.POST.get('answers')))
@@ -414,9 +414,10 @@ def deleteQuestionView(request, pk):
     if request.user:
         if request.method == 'POST':
             model = models.Questions.objects.get(pk=pk)
+            quiz = model.quiz.pk
             model.delete()
             # print(models.Answers.objects.filter(pk=pk).get(quiz))
-            return redirect('add_quiz_n', 13)
+            return redirect('add_quiz_n', quiz)
     else:
         return redirect('authentication')
 

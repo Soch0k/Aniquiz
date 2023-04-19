@@ -19,14 +19,19 @@
             <a>Вход</a>
         </div>
     </div>
+    
+    <div class="errors">
+        {% if errors %}В форме есть ошибки{% endif %}
+    </div>
+
     <div class="fields register">
         <form action="" METHOD="POST">
             {% csrf_token %}
             <label for="LoginR">Введите логин</label>
-            <input id="LoginR" placeholder="Введите логин" name="username">
+            <input id="LoginR" placeholder="Введите логин" name="username" value="{% if username %}{{ username }}{% endif %}">
 
             <label for="Email">Введите Почту</label>
-            <input type="email" id="Email" placeholder="Введите Почту" name="email">
+            <input type="email" id="Email" placeholder="Введите Почту" name="email" value="{% if email %}{{ email }}{% endif %}">
 
             <label for="Password1">Введите пароль</label>
             <input type="password" id="Password1" placeholder="Введите пароль" name="password1">
@@ -37,6 +42,7 @@
             <div class="btnSubmit">
                 <button type="submit">Зарегистрироваться</button>
             </div>
+
         </form>
     </div>
     <div class="fields login">
@@ -44,7 +50,7 @@
             {% csrf_token %}
             <input hidden value="Log" name="Log">
             <label for="Login">Введите логин</label>
-            <input id="Login" placeholder="Введите логин" name="username">
+            <input id="Login" placeholder="Введите логин" name="username" value="{% if usernameLog %}{{ usernameLog }}{% endif %}">
 
             <label for="Password">Подтвердите пароль</label>
             <input type="password" id="Password" placeholder="Подтвердите пароль" name="password">
