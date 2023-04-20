@@ -13,7 +13,7 @@
         <div class="status">
             <form action="{% url 'suply_quiz' quiz %}" method="POST">
                 {% csrf_token %}
-                <label class="label__suply" for="suply">Вы подтверждаите что в этой викторине не было совершено нарушений?</label>
+                <label style="color: white;" class="label__suply" for="suply">Вы подтверждаите что в этой викторине не было совершено нарушений?</label>
                 <input type="checkbox" name="suply" id="suply">
                 <div class="buttons_suply_or_delete">        
                     <button type="submit">Да</button>
@@ -29,7 +29,7 @@
             {% for rating in ratingStatus %}
                 <form class="mark" method="POST">
                     {% csrf_token %}
-                    <label>Поставте отценку этой викторине😊</label>
+                    <label style="color: white;">Поставте отценку этой викторине😊</label>
                     <input hidden type="text" name="ThisRating" value="true">
                     <div class="rating-area">
                         <input type="radio" id="star-5" name="rating" value="5" {% if rating.mark == 5 %}checked{% endif %}>
@@ -51,7 +51,7 @@
         {% else %}
             <form class="mark" method="POST">
                 {% csrf_token %}
-                <label>Поставте отценку этой викторине😊</label>
+                <label style="color: white;">Поставте отценку этой викторине😊</label>
                 <input hidden type="text" name="ThisRating" value="true">
                 <div class="rating-area">
                     <input type="radio" id="star-5" name="rating" value="5" {% if rating.mark == '5' %}checked{% endif %}>

@@ -35,11 +35,11 @@
                         <a href="{% url 'delete_quiz' quiz.pk %}" type="button" class="delete_quiz" id="delete_quiz_btn">Удалить</a>
                     </div>
                 {% endif %}
-                {% if user == quiz.user %}
-                    <div class="edit">
-                        <a href="{% url 'add_quiz_n' quiz.pk %}" type="button" class="edit_quiz" id="edite_quiz_btn">Изменить вопросы</a>
-                    </div>
-                {% endif %}
+<!--                {% if user == quiz.user %}-->
+<!--                    <div class="edit">-->
+<!--                        <a href="{% url 'add_quiz_n' quiz.pk %}" type="button" class="edit_quiz" id="edite_quiz_btn">Изменить вопросы</a>-->
+<!--                    </div>-->
+<!--                {% endif %}-->
             </div>
         </div>
         <div class="test">

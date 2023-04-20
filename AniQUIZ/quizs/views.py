@@ -426,19 +426,27 @@ def deleteQuestionView(request, pk):
 
 def SuplyQuizView(request, pk):
     if request.POST:
-        if request.user.is_superuser:
-            if request.POST.get('suply'):
-                models.Quiz.objects.filter(pk=pk).update(status=True)
-                return redirect('checking_quizs')
-        else:
-            return redirect('Не достаточно прав')
-    else:
-        data = {
-            'status': True,
-            'quiz': pk,
-            'nav': 'addquiz',
-        }
-        return render(request, 'result.html', data)
+        try:
+            if request.user.is_superuser:
+                if request.POST.get('suply'):
+                    models.Quiz.objects.filter(pk=pk).update(status=True)
+                    return redirect('checking_quizs')
+            else:
+                return redirect('Не достаточно прав')
+        except:
+            data = {
+                'status': True,
+                'quiz': pk,
+                'nav': 'addquiz',
+            }
+            return render(request, 'result.html', data)
+
+    data = {
+        'status': True,
+        'quiz': pk,
+        'nav': 'addquiz',
+    }
+    return render(request, 'result.html', data)
 
 
 def CheckingQuizView(request):
